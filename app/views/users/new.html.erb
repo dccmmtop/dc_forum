@@ -1,5 +1,5 @@
-<h1>New User</h1>
-
-<%= render 'form', user: @user %>
-
-<%= link_to 'Back', users_path %>
+<%= form_for @user do |f| %>
+    <%= md_simple_editor  do %>
+        <%= f.text_area :name %>
+    <% end %>
+<% end %>

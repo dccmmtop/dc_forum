@@ -1,0 +1,13 @@
+<h1>My Blog</h1>
+<hr />
+<% @topics.each do |topic| %>
+  <h1><%= link_to topic.title, topic %></h1>
+
+  <p>
+    <%= markdown(topic.body) %>
+  </p>
+
+  <% if topic != @topics.last %>
+  <hr />
+  <% end %>
+<% end %>
