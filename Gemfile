@@ -4,6 +4,9 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
+
+
+gem 'bootstrap-sass'
 gem 'redcarpet'
 gem 'coderay'
 gem "font-awesome-rails"
@@ -41,6 +44,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
+  gem  'better_errors'
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
 end
