@@ -1,5 +1,22 @@
-<%= form_for @user do |f| %>
-    <%= md_simple_editor  do %>
-        <%= f.text_area :name %>
-    <% end %>
-<% end %>
+<div class="container">
+ <div class="panel">
+ <div class="panel-body">
+   
+        <%= notice_message%>
+        <%= form_for(@user) do |f|%>
+        <%= f.label :name%>
+        <%= f.text_field :name,class:'form-control'%>
+
+        <%=f.label :email%>
+        <%=f.email_field :email,class:'form-control'%>
+        <%= f.label :password%>
+        <%= f.password_field :password,class:'form-control'%>
+        <%= f.label :confirmation%>
+        <%= f.password_field :password_confirmation,class:'form-control'%>
+         <br>
+        <%=f.submit "Creat my account",class:"btn btn-primary form-control"%>
+         
+        <% end %>
+        </div>
+        </div>
+ </div>
