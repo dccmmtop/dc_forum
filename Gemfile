@@ -4,6 +4,8 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
+# 头像
+gem 'letter_avatar'
 
 gem 'simple_form'
 gem 'bcrypt'
