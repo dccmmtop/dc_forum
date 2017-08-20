@@ -1,5 +1,5 @@
 <section class="content-wrap">
-  <div class="container">
+
  
     <div class="row">
 
@@ -12,6 +12,8 @@
             <div class="post-meta">
               <span class="author">作者：<%= link_to @topic.user.name,'#'%></span> •
               <time class="post-date" datetime="<%= @topic.created_at.strftime('%Y年%m月%d日')%>" title="<%= @topic.created_at.strftime('%Y年%m月%d日')%>"><%= @topic.created_at.strftime('%Y年%m月%d日')%></time>
+              <span class="read-count"> • 阅读次数：<%=@topic.read_count%></span>
+              <%=link_to " 编辑",edit_topic_path if @topic.user_id == current_user.id %>
             </div>
           </div>
           <div class="post-content">
@@ -38,8 +40,7 @@
 
 
       </main>
-    
-    </div>
+
 
   </div>
 </section>
