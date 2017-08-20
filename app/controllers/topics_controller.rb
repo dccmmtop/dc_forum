@@ -7,8 +7,6 @@ class TopicsController < ApplicationController
     @topic=Topic.find(params[:id])
     @topic.update(read_count: @topic.read_count+1)
     @topic
-
-    
   end
 
   def new
