@@ -1,4 +1,9 @@
 Topic.delete_all
+User.crate(
+name: "dccmmtop"
+email: "dccmmtop@gmail.com"
+passeord: "123456"
+  )
 
 Topic.create(
   user_id:1,
