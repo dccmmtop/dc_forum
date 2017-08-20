@@ -1,6 +1,6 @@
 Topic.delete_all
 User.delete_all
-User.crate(
+User.create(
 name: "dccmmtop",
 email: "dccmmtop@gmail.com",
 password: "123456"
