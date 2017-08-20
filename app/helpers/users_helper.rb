@@ -9,13 +9,14 @@ module UsersHelper
     when :sm then 32
     when :md then 40
     when :lg then 96
+    when :md2 then 60
     else size
     end
   end
 
   def user_avatar_tag(user,version=:md)
     width=user_avatar_width_for_size(version)
-    user.avatar ||= letter_avatar_url(user.name,width)
+    user.avatar = letter_avatar_url(user.name,width)
     image_tag user.avatar, class:'img-circle'
   end
 

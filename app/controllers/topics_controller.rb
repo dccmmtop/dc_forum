@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   def index
-    @topics=Topic.all
+    @topics=Topic.all.order(read_count: :desc)
   end
 
   def show
@@ -32,7 +32,7 @@ class TopicsController < ApplicationController
   end
 
   def topics_params
-    params.require(:topic).permit(:title,:body)
+    params.require(:topic).permit(:title,:body,:tag)
   end
 
 end
