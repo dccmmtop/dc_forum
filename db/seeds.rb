@@ -1,3 +1,4 @@
+Topic.delete_all
 
 Topic.create(
   user_id:1,
