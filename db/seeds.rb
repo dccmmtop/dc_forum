@@ -1,7 +1,8 @@
 Topic.delete_all
+User.delete_all
 User.crate(
-name: "dccmmtop"
-email: "dccmmtop@gmail.com"
+name: "dccmmtop",
+email: "dccmmtop@gmail.com",
 password: "123456"
   )
 
