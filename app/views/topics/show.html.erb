@@ -1,6 +1,6 @@
 <section class="content-wrap">
   <div class="container">
-  <% @topics.each do |topic|%>
+ 
     <div class="row">
 
       <main class="col-md-12 main-content">
@@ -8,14 +8,14 @@
         <article id="108" class="post">
 
           <div class="post-head">
-            <h1 class="post-title"><%=link_to topic.title, topic %></h1>
+            <h1 class="post-title"><%=link_to @topic.title, @topic %></h1>
             <div class="post-meta">
-              <span class="author">作者：<%= link_to topic.user.name,'#'%></span> •
-              <time class="post-date" datetime="<%= topic.created_at.strftime('%Y年%m月%d日')%>" title="<%= topic.created_at.strftime('%Y年%m月%d日')%>"><%= topic.created_at.strftime('%Y年%m月%d日')%></time>
+              <span class="author">作者：<%= link_to @topic.user.name,'#'%></span> •
+              <time class="post-date" datetime="<%= @topic.created_at.strftime('%Y年%m月%d日')%>" title="<%= @topic.created_at.strftime('%Y年%m月%d日')%>"><%= @topic.created_at.strftime('%Y年%m月%d日')%></time>
             </div>
           </div>
           <div class="post-content">
-            <p><%= markdown (truncate(topic.body,length:200))%></p>
+            <p><%= markdown(@topic.body)%></p>
           </div>
           <!-- <div class="post-permalink">
             <a href="#" class="btn btn-default">阅读全文</a>
@@ -40,6 +40,6 @@
       </main>
     
     </div>
-    <% end %>
+
   </div>
 </section>
