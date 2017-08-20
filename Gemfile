@@ -6,8 +6,6 @@ git_source(:github) do |repo_name|
 end
 # 头像
 gem 'letter_avatar'
-
-gem 'simple_form'
 gem 'bcrypt'
 gem 'bootstrap-sass'
 gem 'redcarpet'
