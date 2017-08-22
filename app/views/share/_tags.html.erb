@@ -1,0 +1,8 @@
+<div class="widget tag-widget">
+  <h4 class="title">标签</h4>
+  <div class="content tag-cloud">
+   <% @tags.each do |tag|%>
+   <%= link_to tag.name,"#"%>
+   <% end %>
+ </div>
+</div>

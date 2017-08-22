@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170820125453) do
+ActiveRecord::Schema.define(version: 20170821123218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,9 +19,16 @@ ActiveRecord::Schema.define(version: 20170820125453) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "topics_count", default: 0, null: false
   end
 
   create_table "sessions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -35,6 +42,14 @@ ActiveRecord::Schema.define(version: 20170820125453) do
     t.integer "user_id"
     t.integer "read_count", default: 0
     t.string "tag"
+    t.integer "category_id"
+  end
+
+  create_table "topics_tags", id: false, force: :cascade do |t|
+    t.integer "topic_id"
+    t.integer "tag_id"
+    t.index ["tag_id"], name: "index_topics_tags_on_tag_id"
+    t.index ["topic_id"], name: "index_topics_tags_on_topic_id"
   end
 
   create_table "users", force: :cascade do |t|

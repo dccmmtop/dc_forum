@@ -31,6 +31,10 @@ class TopicsController < ApplicationController
     end
   end
 
+  def destroy
+    Topic.find(params[:id]).destroy
+  end
+
   def topics_params
     params.require(:topic).permit(:title,:body,:tag)
   end

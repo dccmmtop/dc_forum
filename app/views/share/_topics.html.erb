@@ -1,0 +1,27 @@
+<main class="col-md-8 main-content">
+  <% @topics.each do |topic|%>
+  <article id="108" class="post">
+    <div class="post-head">
+      <h1 class="post-title"><%=link_to topic.title, topic %></h1>
+      <div class="post-meta">
+        <span class="author">作者：<%= link_to topic.user.name,'#'%></span> •
+        <time class="post-date" datetime="<%= topic.created_at.strftime('%Y年%m月%d日')%>" title="<%= topic.created_at.strftime('%Y年%m月%d日')%>"><%= topic.created_at.strftime('%Y年%m月%d日')%></time>
+        <span class="read-count"> • 阅读次数：<%=topic.read_count%></span>
+      </div>
+    </div>
+    <div class="post-content">
+      <p><%= markdown (truncate(topic.body,length:200))%></p>
+    </div>
+    <footer class="post-footer clearfix">
+      <div class="pull-left tag-list">
+        <i class="fa fa-folder-open-o"">标签:
+          <%= topic.tag ?topic.tag : '无'%>
+        </i>
+      </div>
+      <div class="pull-right ">
+        <%= link_to "阅读全文>>",topic_url(topic),class:'btn btn-default'%>
+      </div>
+    </footer>
+  </article>
+  <% end %>
+</main>

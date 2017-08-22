@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       log_in @user
       redirect_to root_url
     else
-      render 'new',notice: @user.errors.full_messages
+      redirect_to login_url,alert:'用户名或者密码错误'
     end 
   end
 

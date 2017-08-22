@@ -1,14 +1,20 @@
-Topic.delete_all
-User.delete_all
 User.create(
 name: "dccmmtop",
 email: "dccmmtop@gmail.com",
 password: "123456"
   )
 
+categories=[
+"算法","数据库技术","网站开发","软件工程","web前段","手机开发","ruby","Linux","java","rails","爬虫","区块链"
+]
+categories.each do |category_name|
+  Category.create(name: category_name)
+end
+Topic.delete_all
 Topic.create(
   user_id:1,
   title: "My Very First Topic",
+  category_id:1,
   body:
   '### There Is Something You Should Know!
 
@@ -30,6 +36,7 @@ Topic.create(
 Topic.create(
   user_id: 1,
   title: 'Bus System',
+  category_id:1,
   body:'[题目链接](http://acm.hdu.edu.cn/showproblem.php?pid=1690)
 
   Problem Description
