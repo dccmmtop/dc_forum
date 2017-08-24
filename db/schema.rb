@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170823132023) do
+ActiveRecord::Schema.define(version: 20170824121235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,13 +32,14 @@ ActiveRecord::Schema.define(version: 20170823132023) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "topics_count", default: 0, null: false
+    t.integer "topic_id"
   end
 
-  create_table "tags_topics", id: false, force: :cascade do |t|
-    t.integer "topic_id"
+  create_table "tags_topics", force: :cascade do |t|
     t.integer "tag_id"
-    t.index ["tag_id"], name: "index_tags_topics_on_tag_id"
-    t.index ["topic_id"], name: "index_tags_topics_on_topic_id"
+    t.integer "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "topics", force: :cascade do |t|
@@ -51,13 +52,6 @@ ActiveRecord::Schema.define(version: 20170823132023) do
     t.integer "read_count", default: 0
     t.string "tag"
     t.integer "category_id", default: 1, null: false
-  end
-
-  create_table "topics_tags", id: false, force: :cascade do |t|
-    t.integer "topic_id"
-    t.integer "tag_id"
-    t.index ["tag_id"], name: "index_topics_tags_on_tag_id"
-    t.index ["topic_id"], name: "index_topics_tags_on_topic_id"
   end
 
   create_table "users", force: :cascade do |t|

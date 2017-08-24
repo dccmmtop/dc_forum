@@ -17,6 +17,7 @@ class TopicsController < ApplicationController
     @topic=Topic.new(topics_params)
     @topic.user_id=current_user.id;
     if @topic.save
+      @topic.save_tags
       redirect_to topic_url(@topic),notice: "发表成功!"
     else
     redirect_to topic_url(@topic),alert: "发表失败!" << @topic.errors.full_messages
@@ -29,6 +30,7 @@ class TopicsController < ApplicationController
   def update
     @topic=Topic.find(params[:id])
     if @topic.update(topics_params)
+      @topic.save_tags
       redirect_to topic_url(@topic),notice: "更新成功!"
     end
   end

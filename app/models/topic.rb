@@ -1,14 +1,15 @@
 class Topic < ApplicationRecord
   belongs_to :user, inverse_of: :topics
   belongs_to :category,counter_cache: true
-  has_and_belongs_to_many :tags,counter_cache: true
+  has_many   :tags,through: :tags_topics
   validates :title,:body,presence: true
 
-  after_save :save_tags
   def save_tags
     self.tag.split(",").each do |tag|
-      self.tags.create(name:tag)
-    end
+      if !Tag.find_by("name=? and topic_id=?",tag,self.id)
+        Tag.create(name:tag,topic_id: self.id)
+      end
   end
 
+end
 end
