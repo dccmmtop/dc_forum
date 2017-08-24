@@ -18,6 +18,8 @@ class TopicsController < ApplicationController
     @topic.user_id=current_user.id;
     if @topic.save
       redirect_to topic_url(@topic),notice: "发表成功!"
+    else
+    redirect_to topic_url(@topic),alert: "发表失败!" << @topic.errors.full_messages
     end
   end
 
@@ -33,6 +35,7 @@ class TopicsController < ApplicationController
 
   def destroy
     Topic.find(params[:id]).destroy
+    
   end
 
   def topics_params
