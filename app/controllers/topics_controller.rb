@@ -29,8 +29,11 @@ class TopicsController < ApplicationController
   end
   def update
     @topic=Topic.find(params[:id])
+    if params[:tag] && params[:tag].chome.size==0
+      params[:tag]=nil
+    end
     if @topic.update(topics_params)
-      @topic.save_tags
+      @topic.save_tags 
       redirect_to topic_url(@topic),notice: "更新成功!"
     end
   end
@@ -41,7 +44,7 @@ class TopicsController < ApplicationController
   end
 
   def topics_params
-    params.require(:topic).permit(:title,:body,:tag)
+    params.require(:topic).permit(:title,:body,:tag,:category_id)
   end
 
 end

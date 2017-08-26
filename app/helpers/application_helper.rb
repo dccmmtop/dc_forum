@@ -3,7 +3,14 @@ module ApplicationHelper
     def block_code(code, language)
        language="c" if language=="c++"
       language ||= :plaintext
+      puts "======================================="
+      puts language
+      begin
       CodeRay.scan(code, language).div
+      rescue Exception => e
+        language="markdown"
+        retry 
+      end
     end
   end
 
