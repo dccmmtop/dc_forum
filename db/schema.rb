@@ -35,12 +35,6 @@ ActiveRecord::Schema.define(version: 20170824121235) do
     t.integer "topic_id"
   end
 
-  create_table "tags_topics", force: :cascade do |t|
-    t.integer "tag_id"
-    t.integer "topic_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "topics", force: :cascade do |t|
     t.string "title", null: false

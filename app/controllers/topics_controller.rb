@@ -21,7 +21,7 @@ class TopicsController < ApplicationController
       @topic.save_tags
       redirect_to topic_url(@topic),notice: "发表成功!"
     else
-    redirect_to topic_url(@topic),alert: "发表失败!" << @topic.errors.full_messages
+    redirect_to new_topic_url,alert: "发表失败!" << @topic.errors.full_messages.to_s
     end
   end
 

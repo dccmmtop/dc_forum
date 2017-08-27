@@ -2,7 +2,8 @@ class Topic < ApplicationRecord
   belongs_to :user, inverse_of: :topics
   belongs_to :category,counter_cache: true
   has_many   :tags,through: :tags_topics
-  validates :title,:body,presence: true
+  validates :title,:body,presence: {message: "内容不能为空"}
+  validates :title,length:{maximum: 50,message: "标题长度不能超多50个字符"}
 
  
 
