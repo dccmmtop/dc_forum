@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
+
   def index
-    @topics=Topic.all.order(read_count: :desc)
+    @topics=all_topics_by_time
   end
 
   def show
@@ -40,6 +41,9 @@ class TopicsController < ApplicationController
 
   def destroy
     Topic.find(params[:id]).destroy
+    Tag.where("topic_id=?",params[:id]).each do |tag|
+      tag.destroy
+    end
     
   end
 

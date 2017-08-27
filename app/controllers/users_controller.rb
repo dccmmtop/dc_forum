@@ -25,10 +25,10 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    if @user.save
+    if verify_rucaptcha?(@user) && @user.save
        log_in(@user)
     else
-      redirect_to new_user_url,notice: '注册失败' <<  @user.errors.full_messages.to_s
+      redirect_to new_user_url,alert: '注册失败' <<  @user.errors.full_messages.to_s
     end
   end
 

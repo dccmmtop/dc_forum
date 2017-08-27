@@ -4,6 +4,8 @@ class Topic < ApplicationRecord
   has_many   :tags,through: :tags_topics
   validates :title,:body,presence: true
 
+ 
+
   def save_tags
     
     self.tag.split(",").each do |tag|

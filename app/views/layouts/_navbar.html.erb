@@ -10,15 +10,15 @@
         </div>
         <div class="collapse navbar-collapse" id="main-menu">
           <ul class="menu">
-            <li class='nav-topics ' role="presentation"><%= link_to '首页',root_path %></li>
+            <li class='nav-topics-index ' role="presentation"><%= link_to '首页',root_path %></li>
             <li  role="presentation" class='nav-'><a href="#">论坛</a></li>
             
             <% if !current_user%>
-            <li  role="presentation" class='nav nav-sessions'><%= link_to '登录',login_path%></a></li>
-            <li  role="presentation" class='nav nav-users'><%= link_to "注册",new_user_path%></li>
+            <li  role="presentation" class='nav nav-sessions-new'><%= link_to '登录',login_path%></a></li>
+            <li  role="presentation" class='nav nav-users-new'><%= link_to "注册",new_user_path%></li>
             <% else %>
-            <li  role="presentation" class='nav nav-'><%= link_to "新文章",new_topic_path%></li>
-            <li  role="presentation" class='nav nav-'><a href="#">管理</a></li>
+            <li  role="presentation" class='nav nav-topics-new'><%= link_to "新文章",new_topic_path%></li>
+            <li  role="presentation" class='nav nav-manages-index'><%= link_to "管理",manages_path%></a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               我的 
@@ -41,5 +41,5 @@
   </div>
 </nav>
 <script type="text/javascript">
-    $('.nav-<%= controller_name %>').addClass("nav-current");
+    $('.nav-<%= controller_name %>-<%=action_name %>').addClass("nav-current");
 </script>

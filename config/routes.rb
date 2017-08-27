@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+ 
+  mount RuCaptcha::Engine => "/rucaptcha"
   root 'topics#index'
   get '/login',to:'sessions#new'
   post '/login',to:'sessions#create'
@@ -8,5 +10,6 @@ Rails.application.routes.draw do
   resources :topics
   resources :categories
   resources :tags
+  resources :manages
   
 end
