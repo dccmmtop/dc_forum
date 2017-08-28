@@ -5,6 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+#分页
+gem "kaminari"
+
 #验证码
 gem 'rucaptcha'
 

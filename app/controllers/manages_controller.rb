@@ -1,6 +1,6 @@
 class ManagesController < ApplicationController
   def index
-    @topics=all_topics_by_time
+    @topics=all_topics_by_time.page(params[:page]).per(10)
   end
 
   def destroy
@@ -9,6 +9,5 @@ class ManagesController < ApplicationController
       tag.destroy
     end
     redirect_to manages_url,notice: "删除成功!"
-    
   end
 end

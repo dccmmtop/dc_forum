@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
 
   def index
-    @topics=all_topics_by_time
+    @topics=all_topics_by_time.page(params[:page]).per(10)
   end
 
   def show

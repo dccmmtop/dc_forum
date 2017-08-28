@@ -8,7 +8,7 @@
         <time class="post-date" datetime="<%= topic.created_at.strftime('%Y年%m月%d日')%>" title="<%= topic.created_at.strftime('%Y年%m月%d日')%>"><%= topic.created_at.strftime('%Y年%m月%d日')%></time>
         <span class="read-count"> • 阅读次数：<%=topic.read_count%></span>
         <%  if current_user && topic.user_id == current_user.id %>
-         • 
+        • 
         <%=link_to " 编辑",edit_topic_path(topic) %>
         <% end %>
       </div>
@@ -16,6 +16,8 @@
     <div class="post-content">
       <p><%= markdown (truncate(topic.body,length:200))%></p>
     </div>
+
+
     <footer class="post-footer clearfix">
       <div class="pull-left tag-list">
         <i class="fa fa-folder-open-o"">标签:
@@ -32,4 +34,8 @@
     </footer>
   </article>
   <% end %>
+  <nav class="pagination" role="navigation">
+    <span class="page-number"> <%= paginate @topics%></span>
+  </nav> 
 </main>
+
