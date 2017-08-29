@@ -1,6 +1,84 @@
-<h1>Editing User</h1>
+    <div class="panel panel-default">
+    <div class="panel-body">
+    <%= simple_form_for(@user) do |f|%>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" 
+           href="#collapseOne">
+        基本信息
+        </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <%= f.input :name ,label:'账号'%>
+        <%= f.input :email%>
+        <%= f.input :sex,collection:{'男'=>0,'女'=>1,'其他'=>2},as: :radio_buttons%>
+        <%= f.input :birthday, start_year: 1960, end_year: Date.today.year%>
+      </div>
+      </div>
+    </div>
 
-<%= render 'form', user: @user %>
+    <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" 
+           href="#collapseTwo">
+          修改密码
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse ">
+      <div class="panel-body">
+        <%= f.input :password,label:'旧密码'%>
+        <%= f.input :password,label:'新密码' %>
+        <%= f.input :password_confirmation,label: '确认密码'%>
+      </div>
+    </div>
+  </div>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+   <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" 
+           href="#collapseThree">
+          显示昵称
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse ">
+      <div class="panel-body">
+        <%= f.input :name ,label:'昵称'%>
+        <%= f.label "简介"%>
+        <%= f.text_area :summary,rows:3,class:'form-control'%>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" 
+           href="#collapseFour">
+           地址/婚姻/学位/职业
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse ">
+      <div class="panel-body">
+        <%= f.input :address ,label:'地址'%>
+        <%= f.input :marital_status ,collection:{'单身'=>"single","热恋"=>"in_love","订婚"=>'engaged',"已婚"=>'married',"离异"=>'divorce'},label:'婚姻状况'%>
+        <%= f.input :degree,collection:{'专科'=>"junior","本科"=>"nndergraduate","硕士"=>'master',"博士"=>'doctorate'},label:'学位'%>
+        <%= f.input :position,label:'职位' %>
+      </div>
+    </div>
+  </div>
+
+
+
+
+    <%= f.submit "保存" ,class:'btn btn-primary col-md-2'%>
+    <% end%> 
+    </div>
+    </div>
