@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    if verify_rucaptcha?(@user) && @user.save
+    if  @user.save
        log_in(@user)
     else
       redirect_to new_user_url,alert: '注册失败' <<  @user.errors.full_messages.to_s
@@ -36,15 +36,19 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if params[:user][:password].blank?
+        params[:user].delete(:password) 
+        params[:user].delete(:password_confirmation) 
+        puts "============================================================================"
+  end
+  if @user.update_attributes(params[:user].permit!)
+      redirect_to edit_user_url(@user) ,notice: @user.errors.full_messages.to_s
+    else
+      redirect_to edit_user_url(@user) ,notice: @user.errors.full_messages.to_s
+
     end
+
+    
   end
 
   # DELETE /users/1
@@ -65,12 +69,8 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email,:password)
+      params.require(:user).permit(:name, :email,:password,:password_confirmation,:qq,:sex,:summary,:birthday,:address,:marital_status,:degree,:position,:tel)
     end
-
-	def hh
-	  
-	end
 
   end
 
