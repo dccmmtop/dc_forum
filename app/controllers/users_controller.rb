@@ -27,28 +27,26 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if  @user.save
-       log_in(@user)
-    else
-      redirect_to new_user_url,alert: '注册失败' <<  @user.errors.full_messages.to_s
-    end
+     log_in(@user)
+   else
+    redirect_to new_user_url,alert: '注册失败' <<  @user.errors.full_messages.to_s
   end
+end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    if params[:user][:password].blank?
-        params[:user].delete(:password) 
-        params[:user].delete(:password_confirmation) 
-        puts "============================================================================"
-  end
-  if @user.update_attributes(params[:user].permit!)
-      redirect_to edit_user_url(@user) ,notice: @user.errors.full_messages.to_s
+    #允许不更改密码,只更改其他信息
+    if (!params[:old_password].blank? && !params[:user][:password].blank? && @user.authenticate(params[:old_password]) ) || (params[:old_password].blank?  && params[:user][:password].blank?)
+      puts params[:old_password]
+      if @user.update(user_params)
+        redirect_to edit_user_url(@user) ,notice: "信息修改成功"
+      else
+        redirect_to edit_user_url(@user) ,alert: @user.errors.full_messages.to_s
+      end
     else
-      redirect_to edit_user_url(@user) ,notice: @user.errors.full_messages.to_s
-
+     redirect_to edit_user_url(@user) ,alert: "密码错误"
     end
-
-    
   end
 
   # DELETE /users/1
@@ -69,7 +67,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email,:password,:password_confirmation,:qq,:sex,:summary,:birthday,:address,:marital_status,:degree,:position,:tel)
+      params.require(:user).permit(:name, :email,:old_password,:password,:password_confirmation,:qq,:sex,:summary,:birthday,:address,:marital_status,:degree,:position,:tel,:nickname)
     end
 
   end

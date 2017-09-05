@@ -13,9 +13,9 @@
         <div id="collapseOne" class="panel-collapse collapse in">
           <div class="panel-body">
             <%= f.input :name ,label:'账号'%>
-            <%= f.input :email%>
-            <%= f.input :sex,collection:{'男'=>0,'女'=>1,'其他'=>2},as: :radio_buttons%>
-            <%= f.input :birthday, start_year: 1960, end_year: Date.today.year%>
+            <%= f.input :email,label:'邮箱'%>
+            <%= f.input :sex,collection:{'男'=>0,'女'=>1,'其他'=>2},as: :radio_buttons,label: '性别'%>
+            <%= f.input :birthday, start_year: 1960, end_year: Date.today.year,label:'出生日期'%>
           </div>
         </div>
       </div>
@@ -31,7 +31,8 @@
       </div>
       <div id="collapseTwo" class="panel-collapse collapse ">
         <div class="panel-body">
-          <%= f.input :password,label:'旧密码'%>
+          <%= f.label("旧密码") %>
+          <%= text_field_tag(:old_password,"",class: "form-control",type:'password')%>
           <%= f.input :password,label:'新密码' %>
           <%= f.input :password_confirmation,label: '确认密码'%>
         </div>
@@ -49,7 +50,7 @@
     </div>
     <div id="collapseThree" class="panel-collapse collapse ">
       <div class="panel-body">
-        <%= f.input :name ,label:'昵称'%>
+        <%= f.input :nickname ,label:'昵称'%>
         <%= f.label "简介"%>
         <%= f.text_area :summary,rows:3,class:'form-control'%>
       </div>

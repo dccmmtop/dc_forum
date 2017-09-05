@@ -20,4 +20,12 @@ module UsersHelper
     image_tag user.avatar, class:'img-circle'
   end
 
+  def nickname_user
+    if current_user && (current_user.nickname.nil? || current_user.nickname.size==0)
+      current_user.name
+    elsif current_user
+      current_user.nickname
+    end
+  end
+
 end

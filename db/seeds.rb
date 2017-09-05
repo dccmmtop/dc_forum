@@ -6,7 +6,7 @@
 #   )
 
 # categories=[
-# "算法","数据库技术","网站开发","软件工程","web前段","手机开发","ruby","Linux","java","rails","爬虫","区块链"
+# "未分类","数据库技术","网站开发","软件工程","web前段","手机开发","ruby","Linux","java","rails","爬虫","区块链","算法"
 # ]
 # categories.each do |category_name|
 #   Category.create(name: category_name)
