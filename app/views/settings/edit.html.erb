@@ -1,0 +1,31 @@
+<%= simple_form_for @setting  do |f|%>
+<div class="row">
+  <div class="col-md-6 one">
+   <!--  <%= f.label '后台管理列表数:'%> -->
+    <%= f.input :manages_per_page_count,class:'one'%>
+    <%= f.input :category_list_count%>
+    <%= f.input :comment_list_count%>
+  </div>
+  
+  <div class="col-md-6 two">
+
+    <%= f.input :read_rank_list_count%>
+    <%= f.input :comment%>
+  </div>
+   
+</div>
+<% end %>
+<style type="text/css">
+   .form-control{
+    display: inline;
+    width: 100px;
+    margin-left: 10px;
+   }
+/*   .one{
+     margin-left: 10px; 
+   }
+   .two{
+    margin-right: 10px; 
+   }*/
+  }
+</style>

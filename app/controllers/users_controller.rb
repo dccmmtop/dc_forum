@@ -27,11 +27,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if  @user.save
-     log_in(@user)
-   else
-    redirect_to new_user_url,alert: '注册失败' <<  @user.errors.full_messages.to_s
+      log_in(@user)
+      #设置 默认的博客设置信息
+      current_user.create_setting
+      redirect_to root_url
+    else
+      redirect_to new_user_url,alert: '注册失败' <<  @user.errors.full_messages.to_s
+    end
   end
-end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
@@ -46,8 +49,8 @@ end
       end
     else
      redirect_to edit_user_url(@user) ,alert: "密码错误"
-    end
-  end
+   end
+ end
 
   # DELETE /users/1
   # DELETE /users/1.json

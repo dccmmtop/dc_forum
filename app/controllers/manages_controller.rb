@@ -1,6 +1,6 @@
 class ManagesController < ApplicationController
   def index
-    @topics=all_topics_by_time.page(params[:page]).per(10)
+    @topics=current_user.topics.page(params[:page]).per(10)
   end
 
   def destroy
