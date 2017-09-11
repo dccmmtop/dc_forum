@@ -4,5 +4,5 @@ RuCaptcha.configure do
   # 你需要将 cache_store 配置在一个支持跨进程、跨服务器共享的地方，例如 Memcached, Redis 都可以
   # 不可以用 file_store, null_store 或者 memory_store 
   # 因为这些存储方式无法跨进程或服务器，当多进程、服务器部署的时候验证码会验证不过。
-  self.cache_store = []
+  self.cache_store = :mem_cache_store
 end

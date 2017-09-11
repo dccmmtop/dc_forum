@@ -10,6 +10,7 @@ gem "kaminari"
 
 #验证码
 gem 'rucaptcha'
+gem 'dalli'
 
 gem 'simple_form'
 # 头像

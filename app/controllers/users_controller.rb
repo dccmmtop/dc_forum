@@ -26,9 +26,9 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    if  @user.save
+    if  verify_rucaptcha?(@user)&&@user.save
       log_in(@user)
-      #设置 默认的博客设置信息
+      #设置   默认的博客设置信息
       current_user.create_setting
       redirect_to root_url
     else
