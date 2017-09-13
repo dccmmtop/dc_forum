@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   post '/login',to:'sessions#create'
   delete '/logout',to:'sessions#destroy'
 
-  resources :users
+  resources :users do
+    collection do 
+      get :verify_rucaptcha
+    end
+  end
   resources :settings
   resources :topics
   resources :categories

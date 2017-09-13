@@ -62,6 +62,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def verify_rucaptcha
+    if verify_rucaptcha?(params[:_rucaptcha])
+    render  plain: "true"
+    else 
+      render :plain=>"false"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
