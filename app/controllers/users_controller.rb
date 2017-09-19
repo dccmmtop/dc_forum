@@ -25,16 +25,19 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-    if  verify_rucaptcha?(@user)&&@user.save
+    respond_to do |format|
+      @user = User.new(user_params)
+    # @user.save
+    if @user.save
       log_in(@user)
-      #设置   默认的博客设置信息
-      current_user.create_setting
-      redirect_to root_url
-    else
-      redirect_to new_user_url,alert: '注册失败' <<  @user.errors.full_messages.to_s
-    end
+    #     #设置   默认的博客设置信息
+    current_user.create_setting
+    format.html {redirect_to root_url}
+  else
+    format.js{}
   end
+end
+end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
@@ -64,7 +67,7 @@ class UsersController < ApplicationController
 
   def verify_rucaptcha
     if verify_rucaptcha?(params[:_rucaptcha])
-    render  plain: "true"
+      render  plain: "true"
     else 
       render :plain=>"false"
     end

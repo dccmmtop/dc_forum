@@ -1,65 +1,66 @@
  
 <div class="panel">
-    <div class="panel-body">
-        <%= form_for(@user) do |f|%>
-        <%= f.label :name%>
-        <%= f.text_field :name,class:'form-control'%>
+  <div class="panel-body">
+    <%= form_for @user,:remote=>true do |f|%>
+    <%= f.label :name%>
+    <%= f.text_field :name,class:'form-control'%>
 
-        <%=f.label :email%>
-        <%=f.email_field :email,class:'form-control'%>
-        <%= f.label :password%>
-        <%= f.password_field :password,class:'form-control'%>
-        <%= f.label :confirmation%>
-        <%= f.password_field :password_confirmation,class:'form-control'%>
-        <br>
-        <div class="form-group ">
-            <%= rucaptcha_input_tag( class:'captcha-text',placeholder: '输入验证码') %>
-            <%= rucaptcha_image_tag(class:'image-box', alt: 'Captcha') %>
-            <%= image_tag("wrong.png",class:'wrong')%>
-        </div>
-        <br>
-        <%= link_to "ajax","#",class:'ajax'%>
-        <%=f.submit "Creat my account",class:"btn btn-primary form-control"%>
-        <% end %>
+    <%=f.label :email%>
+    <%=f.email_field :email,class:'form-control'%>
+    <%= f.label :password%>
+    <%= f.password_field :password,class:'form-control'%>
+    <%= f.label :confirmation%>
+    <%= f.password_field :password_confirmation,class:'form-control'%>
+    <br>
+    <div class="form-group ">
+      <%= rucaptcha_input_tag( class:'captcha-text',placeholder: '输入验证码') %>
+      <%= rucaptcha_image_tag(class:'image-box', alt: 'Captcha') %>
+      <%= image_tag("wrong.png",class:'wrong')%>
     </div>
+    <br>
+    <%=f.submit "Creat my account",class:"btn btn-primary form-control"%>
+    <% end %>
+  </div>
 </div>
 <style type="text/css">
-    .wrong{
-        width: 22px;
-        height: 22px;
-        margin-left: -160px;
-        display: none;
-    }
-</style>>
+  .wrong{
+    width: 22px;
+    height: 22px;
+    margin-left: -160px;
+    display: none;
+  }
+</style>
 
 <script type="text/javascript">
-    function change_captcha(){
-        var src=$(".image-box").attr("src");
-        $(".image-box").attr("src",src.split("?")[0]+"?"+(new Date().getTime()))
-    }
-    $(".image-box").click(function(){
-        change_captcha();
-        $(".wrong").hide();
-        $(".captcha-text").attr(value,"");
-    })
-    $(".captcha-text").on('keyup', function(event) {
-        var content=$(".captcha-text").val();
-        var length=content.length
-        if (length==4){
-         $.ajax({
-          type:"GET",
-          url:"/users/verify_rucaptcha",
-          data: {_rucaptcha: content},
-          success:function(result){
-              if(result=="false")
-              {
-                // change_captcha();
-                $(".wrong").show();
-            }
-            return ;
+  function change_captcha(){
+    var src=$(".image-box").attr("src");
+    $(".image-box").attr("src",src.split("?")[0]+"?"+(new Date().getTime()))
+  }
+  $(".image-box").click(function(){
+    change_captcha();
+    $(".wrong").hide();
+    $(".captcha-text").val("");
+  })
+  $(".captcha-text").on('keyup', function(event) {
+    var content=$(".captcha-text").val();
+    var length=content.length
+    if (length==4){
+      $.ajax({
+        type:"GET",
+        url:"/users/verify_rucaptcha",
+        data: {_rucaptcha: content},
+        success:function(result){
+          if(result=="false")
+          {
+            $(".wrong").show();
+            change_captcha();
+          }
+          return ;
         }
-    })
-     }
- });
-
+      })
+    }
+    else{
+      $(".wrong").hide();
+    }
+  });
 </script>
