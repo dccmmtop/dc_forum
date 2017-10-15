@@ -15,7 +15,7 @@
     <div class="form-group ">
       <%= rucaptcha_input_tag( class:'captcha-text',placeholder: '输入验证码') %>
       <%= rucaptcha_image_tag(class:'image-box', alt: 'Captcha') %>
-      <%= image_tag("wrong.png",class:'wrong')%>
+      <span class="wrong">验证码错误</span>
     </div>
     <br>
     <%=f.submit "Creat my account",class:"btn btn-primary form-control"%>
@@ -24,11 +24,10 @@
 </div>
 <style type="text/css">
   .wrong{
-    width: 22px;
-    height: 22px;
-    margin-left: -160px;
-    display: none;
+     color: red;
+     display: none;
   }
+}
 </style>
 
 <script type="text/javascript">
@@ -52,8 +51,8 @@
         success:function(result){
           if(result=="false")
           {
-            $(".wrong").show();
             change_captcha();
+            $(".wrong").show();
           }
           return ;
         }

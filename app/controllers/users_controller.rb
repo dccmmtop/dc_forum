@@ -30,13 +30,18 @@ class UsersController < ApplicationController
     # @user.save
     if @user.save
       log_in(@user)
-    #     #设置   默认的博客设置信息
-    current_user.create_setting
-    format.html {redirect_to root_url}
+        #设置   默认的博客设置信息
+        current_user.create_setting
+   format.html {redirect_to root_url}
   else
+    #   # format.html { render action: "new" }
     format.js{}
+    #   # format.json { render json: @user.errors, status: :unprocessable_entity }
+    #   # @user
+    #   end
   end
-end
+    # 
+  end
 end
 
   # PATCH/PUT /users/1
