@@ -1,19 +1,12 @@
 // $("ul.errors").html("");
+     $(".wrong").hide()
 <% if @user.errors.any? %>
      <% @user.errors.full_messages.each do |m| %>
-     // alert("<%= m.html_safe %>")
-     <% if m.include?("Name")%>
-        $("#user_name").attr("placeholder","<%= m.html_safe %>")
-     <%elsif m.include?("Email")%>
-        $("#user_email").attr("placeholder","<%= m.html_safe %>")
-     <%elsif m.include?("Password")%>
-        $("#user_password").attr("placeholder","<%= m.html_safe %>")
-     <%elsif m.include?("Password confirmation")%>
-        $("#user_password_confirmation").attr("placeholder","<%= m.html_safe %>")
-     <%end%>
+      insert("<%= m.html_safe%>")
+
+       <% if m.html_safe.include?("Code")%>
+         change_captcha()
+         <% end %> 
+      <% break %>
      <%end%>
   <% end %>
-  $("input::-webkit-input-placeholder") .css("color","#f30404")
-       /* placeholder颜色  */
-       /*color: #f30404;*/
-   // }
