@@ -27,28 +27,23 @@ class UsersController < ApplicationController
   def create
     respond_to do |format|
       @user = User.new(user_params)
-    # @user.save
-    if @user.save
-      if verify_rucaptcha?(@user)
-        log_in(@user)
-        #设置   默认的博客设置信息
-        current_user.create_setting
-       format.html {redirect_to root_url}
+      # @user.save
+      if @user.save
+        if verify_rucaptcha?(@user)
+          log_in(@user)
+          #设置   默认的博客设置信息
+          current_user.create_setting
+          format.html {redirect_to root_url}
+        else
+          @user.errors.messages[:code]=["验证码错误"]
+          @user.destroy
+          format.js{}
+        end
       else
-        @user.errors.messages[:code]=["验证码错误"]
-        @user.destroy
-        format.js{}
+       format.js{}
       end
-  else
-    #   # format.html { render action: "new" }
-    format.js{}
-    #   # format.json { render json: @user.errors, status: :unprocessable_entity }
-    #   # @user
-    #   end
+    end
   end
-    # 
-  end
-end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
