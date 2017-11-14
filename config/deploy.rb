@@ -12,7 +12,7 @@ set :branch, 'master'
 set :forward_agent, true
 set :shared_dirs, ['log']
 set :shared_files, ['config/database.yml', 'config/secrets.yml']
-
+set :rvm_path, '/usr/local/rvm/scripts/rvm'
 desc 'Set up environment.'
 task :remote_environment do
   invoke :'rvm:use', 'ruby-2.3.3@rails5'
