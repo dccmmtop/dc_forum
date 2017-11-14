@@ -9,7 +9,7 @@ set :user, 'root'
 set :deploy_to, '/home/deploy/dc_forum/'
 set :repository, 'https://github.com/dccmmtop/dc_forum.git'    # private repository
 set :branch, 'master'
-
+set :forward_agent, true
 set :shared_dirs, ['log']
 set :shared_files, ['config/database.yml', 'config/secrets.yml']
 
