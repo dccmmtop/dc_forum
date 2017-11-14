@@ -15,7 +15,7 @@ set :shared_files, ['config/database.yml', 'config/secrets.yml']
 
 desc 'Set up environment.'
 task :remote_environment do
-  # invoke :'rvm:use', 'ruby-2.3.3@rails5'
+  invoke :'rvm:use', 'ruby-2.3.3@rails5'
 end
 desc 'Prepare for deployment.'
 task :setup do
