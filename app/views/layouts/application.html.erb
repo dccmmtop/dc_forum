@@ -12,6 +12,7 @@
 <body>
   <%= render 'layouts/header'%>
   <%= render 'layouts/navbar'%>
+  <% Topic.add_topic %>
 <div class="container">
   <%= notice_message %>
   <%= yield %>

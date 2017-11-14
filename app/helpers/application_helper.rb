@@ -76,6 +76,25 @@ module ApplicationHelper
 
     flash_messages.join("\n").html_safe
   end
+  def add_topic(path)
+    topic=File.open(path,"r")
+    topic.each_line do |line|
+      title= line.split(":")[1] if line[0...4] == "title"
+      _tag= line.split(":")[1] if line[0...2] == "tag"
+      date= line.split(":")[1] if line[0...3] == "date"
+      categories=line.split(":")[1] if line[0...10] == "categories"
+      body << line + "\n"
+    end
+    Topic.create(
+      user_id: User.find_by(name: 'dccmmtop'),
+      title: title,
+      tag: _tag,
+      category_id: Category.find_by(name:categories),
+      body: body
+    )
+
+    
+  end
 
   
 end
