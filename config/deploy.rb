@@ -1,50 +1,39 @@
-require 'mina/bundler'
-require 'mina/rails'
-require 'mina/git'
-require 'mina/rvm'
-require 'mina/puma'
-require 'mina/logs'
-set :domain, '39.108.138.149'
-set :user, 'root'
-set :deploy_to, '/home/deploy/dc_forum/'
-set :repository, 'https://github.com/dccmmtop/dc_forum.git'    # private repository
-set :branch, 'master'
-set :forward_agent, true
-set :shared_dirs, ['log']
-set :shared_files, ['config/database.yml', 'config/secrets.yml']
-set :rvm_use_path, '/usr/local/rvm/scripts/rvm'
-desc 'Set up environment.'
-task :remote_environment do
-	invoke :'rvm:use', 'ruby-2.3.3@rails5'
-	# command %[ export PATH="$PATH:$HOME/.rvm/scripts/rvm" ]
-end
-desc 'Prepare for deployment.'
-task :setup do
-	task :setup do
-		['log', 'config', 'public/upload', 'tmp/pids', 'tmp/sockets'].each do |dir|
-			command %{mkdir -p "fetch(:deploy_to)/shared/#{dir}"}
-			command %{chmod g+rx,u+rwx "fetch(:deploy_to)/shared/#{dir}"}
-		end
+# config valid for current version and patch releases of Capistrano
+lock "~> 3.10.0"
 
-		['config/database.yml', 'config/secrets.yml', 'config/puma.rb'].each do |file|
-			command %{touch "fetch(:deploy_to)/shared/#{file}"}
-			comment %{Be sure to edit 'shared/#{file}'.}
-		end
-	end
-end
-desc 'Deploy current version to the server.'
-task deploy: :remote_environment do
-	deploy do
-		invoke :'git:clone'
-		invoke :'deploy:link_shared_paths'
-		invoke :'bundle:install'
-		invoke :'rails:db_migrate'
-		invoke :'rails:assets_precompile'
-		invoke :'deploy:cleanup'
+set :application, "dc_forum"
+set :repo_url, "https://github.com/dccmmtop/dc_forum.git"
 
-		on :launch do
-			invoke :'puma:start'
-			invoke :'puma:phased_restart'
-		end
-	end
-end
+# Default branch is :master
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+
+# Default deploy_to directory is /var/www/my_app_name
+# set :deploy_to, "/var/www/my_app_name"
+
+# Default value for :format is :airbrussh.
+# set :format, :airbrussh
+
+# You can configure the Airbrussh format using :format_options.
+# These are the defaults.
+# set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
+
+# Default value for :pty is false
+# set :pty, true
+
+# Default value for :linked_files is []
+# append :linked_files, "config/database.yml", "config/secrets.yml"
+
+# Default value for linked_dirs is []
+# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+set :user ,"root"
+# Default value for local_user is ENV['USER']
+# set :local_user, -> { `git config user.name`.chomp }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
+
+# Uncomment the following to require manually verifying the host key before first deploy.
+# set :ssh_options, verify_host_key: :secure
