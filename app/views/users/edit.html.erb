@@ -1,11 +1,11 @@
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <%= simple_form_for(@user) do |f|%>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" data-parent="#accordion" 
-              href="#collapseOne">
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= simple_form_for(@user) do |f|%>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion"
+                                      href="#collapseOne">
               基本信息
             </a>
           </h4>
@@ -23,80 +23,86 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" 
-            href="#collapseTwo">
-            修改密码
-          </a>
-        </h4>
-      </div>
-      <div id="collapseTwo" class="panel-collapse collapse ">
-        <div class="panel-body">
-          <%= f.label("旧密码") %>
-          <%= text_field_tag(:old_password,"",class: "form-control",type:'password')%>
-          <%= f.input :password,label:'新密码' %>
-          <%= f.input :password_confirmation,label: '确认密码'%>
+            <a data-toggle="collapse" data-parent="#accordion"
+                                      href="#collapseTwo">
+              修改密码
+            </a>
+          </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse ">
+          <div class="panel-body">
+            <%= f.label("旧密码") %>
+            <%= text_field_tag(:old_password,"",class: "form-control",type:'password')%>
+            <%= f.input :password,label:'新密码' %>
+            <%= f.input :password_confirmation,label: '确认密码'%>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" 
-          href="#collapseThree">
-          显示昵称
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse ">
-      <div class="panel-body">
-        <%= f.input :nickname ,label:'昵称'%>
-        <%= f.label "简介"%>
-        <%= f.text_area :summary,rows:3,class:'form-control'%>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion"
+                                      href="#collapseThree">
+              显示昵称
+            </a>
+          </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse ">
+          <div class="panel-body">
+            <%= f.input :nickname ,label:'昵称'%>
+            <%= f.label "简介"%>
+            <%= f.text_area :summary,rows:3,class:'form-control'%>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion"
+                                      href="#collapseFive">
+              联系方式
+            </a>
+          </h4>
+        </div>
+        <div id="collapseFive" class="panel-collapse collapse ">
+          <div class="panel-body">
+            <%= f.input :qq ,label:'qq'%>
+            <%= f.input :tel,label:'电话'%>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion"
+                                      href="#collapseFour">
+              地址/婚姻/学位/职业
+            </a>
+          </h4>
+        </div>
+        <div id="collapseFour" class="panel-collapse collapse ">
+          <div class="panel-body">
+            <%= f.input :address ,label:'地址'%>
+            <%= f.input :marital_status ,collection:{'单身'=>"single","热恋"=>"in_love","订婚"=>'engaged',"已婚"=>'married',"离异"=>'divorce'},label:'婚姻状况'%>
+            <%= f.input :degree,collection:{'专科'=>"junior","本科"=>"nndergraduate","硕士"=>'master',"博士"=>'doctorate'},label:'学位'%>
+            <%= f.input :position,label:'职位' %>
+          </div>
+        </div>
+      </div>
+      <%= f.submit "保存" ,class:'btn btn-primary col-md-2'%>
+    <% end%>
   </div>
-
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" 
-        href="#collapseFive">
-        联系方式
-      </a>
-    </h4>
-  </div>
-  <div id="collapseFive" class="panel-collapse collapse ">
-    <div class="panel-body">
-      <%= f.input :qq ,label:'qq'%>
-      <%= f.input :tel,label:'电话'%>
-    </div>
-  </div>
 </div>
+<script>
+// window.onscroll = scroll;
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4 class="panel-title">
-      <a data-toggle="collapse" data-parent="#accordion" 
-      href="#collapseFour">
-      地址/婚姻/学位/职业
-    </a>
-  </h4>
-</div>
-<div id="collapseFour" class="panel-collapse collapse ">
-  <div class="panel-body">
-    <%= f.input :address ,label:'地址'%>
-    <%= f.input :marital_status ,collection:{'单身'=>"single","热恋"=>"in_love","订婚"=>'engaged',"已婚"=>'married',"离异"=>'divorce'},label:'婚姻状况'%>
-    <%= f.input :degree,collection:{'专科'=>"junior","本科"=>"nndergraduate","硕士"=>'master',"博士"=>'doctorate'},label:'学位'%>
-    <%= f.input :position,label:'职位' %>
-  </div>
-</div>
-</div>
-
-
-
-
-<%= f.submit "保存" ,class:'btn btn-primary col-md-2'%>
-<% end%> 
-</div>
-</div>
+// function scroll()
+// {
+   // alert("检测到页面滚动事件:"+window.pageXOffset+" "+window.pageYOffset);
+   // $("html,body").scrollTop(1000000);
+    // 注意: window.innerWidth 和 window.innerHeight 可以获得页面可见区域的宽和高.
+// }
+</script>
