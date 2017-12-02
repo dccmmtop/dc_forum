@@ -1,0 +1,8 @@
+<div class="widget category-widget">
+  <h4 class="title">友情链接</h4>
+  <div class="friend_links">
+    <% user.friend_links.each do |friend| %>
+      <%= link_to friend.name,friend_link%>
+    <% end %>
+  </div>
+</div>

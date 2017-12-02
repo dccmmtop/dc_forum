@@ -1,13 +1,20 @@
- <header class="main-header"  style='background-image: url(https://d3cbihxaqsuq0s.cloudfront.net/images/48545960_xl.jpg)'>
+<header class="main-header"  style='background-image: url(https://d3cbihxaqsuq0s.cloudfront.net/images/48545960_xl.jpg)'>
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <!-- start logo -->
-       <%= user_avatar_tag current_user,:md2 if current_user%>
-        <!-- end logo -->
-        <h2 class="blog-title"><%= nickname_user %></h2>
+        <% if user%>
+          <%= user_avatar_tag user,:md2%>
+          <h2 class="blog-title"><%= user.nickname %></h2>
+          <em class="summary"><%= user.summary%> </em>
+        <% end %>
+
         <img src="https://d3cbihxaqsuq0s.cloudfront.net/images/35514164_xl.jpg" alt="博客" class="hide">
       </div>
     </div>
   </div>
 </header>
+<style>
+.summary{
+  color: #0a0202
+}
+</style>

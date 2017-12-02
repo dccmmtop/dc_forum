@@ -92,9 +92,5 @@ module ApplicationHelper
       category_id: Category.find_by(name:categories),
       body: body
     )
-
-    
   end
-
-  
 end

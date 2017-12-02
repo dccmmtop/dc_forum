@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :topics, dependent: :destroy
+  has_many :friend_links
   has_one :setting
 
   def password_not_blank?

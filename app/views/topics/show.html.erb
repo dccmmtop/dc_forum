@@ -1,48 +1,52 @@
+<% content_for :head do%>
+ <%= render 'layouts/header',user: @topic.user%>
+ <% end %>
 <section class="content-wrap">
 
- 
+
   <div class="row">
 
-    <main class="col-md-12 main-content">
+    <main class="col-md-9 main-content">
 
-      <article id="108" class="post">
+    <article id="108" class="post">
 
-        <div class="post-head">
-          <h1 class="post-title"><%=link_to @topic.title, @topic %></h1>
-          <div class="post-meta">
-            <span class="author">作者：<%= link_to @topic.user.name,'#'%></span> •
-            <time class="post-date" datetime="<%= @topic.created_at.strftime('%Y年%m月%d日')%>" title="<%= @topic.created_at.strftime('%Y年%m月%d日')%>"><%= @topic.created_at.strftime('%Y年%m月%d日')%></time>
-            <span class="read-count"> • 阅读次数：<%=@topic.read_count%></span>
-            <%=link_to " 编辑",edit_topic_path if current_user && @topic.user_id == current_user.id %>
-          </div>
+      <div class="post-head">
+        <h1 class="post-title"><%=link_to @topic.title, @topic %></h1>
+        <div class="post-meta">
+          <span class="author">作者：<%= link_to @topic.user.name,'#'%></span> •
+          <time class="post-date" datetime="<%= @topic.created_at.strftime('%Y年%m月%d日')%>" title="<%= @topic.created_at.strftime('%Y年%m月%d日')%>"><%= @topic.created_at.strftime('%Y年%m月%d日')%></time>
+          <span class="read-count"> • 阅读次数：<%=@topic.read_count%></span>
+          <%=link_to " 编辑",edit_topic_path if current_user && @topic.user_id == current_user.id %>
         </div>
-        <div class="post-content">
-          <p><%= markdown(@topic.body)%></p>
+      </div>
+      <div class="post-content">
+        <p><%= markdown(@topic.body)%></p>
+      </div>
+      <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+          <i class="fa fa-folder-open-o"">标签:
+            <%= @topic.tag&&@topic.tag.size>0 ? @topic.tag: '无'%>
+          </i>
+          &nbsp&nbsp&nbsp
+          <i class="fa fa-folder-open-o"">分类:
+            <%= @topic.category.name%>
+          </i>
         </div>
-          <!-- <div class="post-permalink">
-            <a href="#" class="btn btn-default">阅读全文</a>
-          </div> -->
-
-          
-
-       <!--  <nav class="pagination" role="navigation">
-          <span class="page-number">第 1 页 ⁄ 共 9 页</span>
-          <a class="older-posts" href="#"><i class="fa fa-angle-right"></i></a>
-        </nav> -->
-        <footer class="post-footer clearfix">
-          <div class="pull-left tag-list">
-            <i class="fa fa-folder-open-o"">标签:
-               <%= @topic.tag&&@topic.tag.size>0 ? @topic.tag: '无'%>
-            </i>
-            &nbsp&nbsp&nbsp
-        <i class="fa fa-folder-open-o"">分类:
-          <%= @topic.category.name%>
-        </i>
-          </div>
-        </footer>
-      </article>
+      </footer>
+    </article>
 
     </main>
-
-
+    <aside class="col-md-3 sidebar">
+      <%= render "share/categories",categories: all_categories%>
+      <%= render "share/tags",tags: all_tags%>
+      <%= render "share/most_read",topics: sort_by_read_count(current_user)%>
+      <%= render "share/latest_comments"%>
+      <%= render 'share/friend_links' ,user: @topic.user%>
+    </aside>
   </div>
+</section>
+<style>
+.container {
+  width: 70%;
+}
+</style>

@@ -10,7 +10,7 @@
 
 
 <body>
-  <%= render 'layouts/header'%>
+  <%= yield :head%>
   <%= render 'layouts/navbar'%>
   <% Topic.add_topic %>
 <div class="container">
