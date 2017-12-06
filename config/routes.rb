@@ -16,5 +16,6 @@ Rails.application.routes.draw do
   resources :categories
   resources :tags
   resources :manages
+  resources :friend_links
   
 end
