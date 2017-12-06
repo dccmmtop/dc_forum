@@ -10,6 +10,10 @@ class FriendLinksController < ApplicationController
     end
   end
 
+  def detroy
+    FriendLink.find(params[:id]).destroy
+  end
+
   def friend_link_params
     params.require().permit(:user_id,:name,:link)
     

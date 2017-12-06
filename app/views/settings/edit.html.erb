@@ -25,7 +25,7 @@
         <div class="show">
           <label class="label-name">名称 </label><input type="text" value= "<%= friend.name %>" class="name">
           <label class="label-link">链接 </label><input type="text" value= "<%= friend.link %>"class="link">
-          <a class="btn btn-danger" >删除</a>
+          <a class="btn btn-danger" name="<%= friend.id %>" >删除</a>
         </div> 
       <% end %>
       <div class="add">
@@ -88,6 +88,17 @@ $(".btn-add").click(function(){
         }
       })
     }
+});
+$(".btn-danger").click(function(){
+  var id = $(this).attr("name");
+  $.ajax({
+    type:"DELETE",
+    url:"/friend_links/" + id,
+    success:function(result){
+      location.reload();
+        }
+  })
+
 });
 
 
