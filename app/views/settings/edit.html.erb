@@ -37,29 +37,8 @@
   </div>
 </div>
 <style type="text/css">
-.form-control{
-  display: inline;
-  width: 100px;
-  margin-left: 10px;
-}
-input[type='text'],input[type='number']{
-  border-radius: 8px;
-}
-.btn{
-  margin-left: 5%;
-}
-.name,.link{
-  margin-left:1%;
-}
-.link{
-  width: 50%;
-}
-.label-link{
-  margin-left: 10%;
-}
-.show{
-  margin-bottom: 10px;
-}
+
+
 </style>
 <script type="text/javascript">
 $(".btn-add").click(function(){
@@ -91,15 +70,13 @@ $(".btn-add").click(function(){
 });
 $(".btn-danger").click(function(){
   var id = $(this).attr("name");
+  var object = $(this).parent();
   $.ajax({
     type:"DELETE",
     url:"/friend_links/" + id,
     success:function(result){
-      location.reload();
-        }
+      object.remove();
+    }
   })
-
 });
-
-
 </script>

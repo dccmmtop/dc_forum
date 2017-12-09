@@ -10,8 +10,9 @@ class FriendLinksController < ApplicationController
     end
   end
 
-  def detroy
+  def destroy
     FriendLink.find(params[:id]).destroy
+    render :plain => "true"
   end
 
   def friend_link_params
