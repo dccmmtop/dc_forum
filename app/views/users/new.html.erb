@@ -1,0 +1,140 @@
+ 
+<div class="panel">
+  <div class="panel-body">
+  <div class="alert alert-danger"><button type="button" class="close" ">&times;
+  </button><span class="info"></span></div>
+    <%= form_for @user,:remote=>true do |f|%>
+    <%= f.label :name%>
+    <%= f.text_field :name,class:'form-control'%>
+
+    <%=f.label :email%>
+    <%=f.email_field :email,class:'form-control'%>
+    <%= f.label :password%>
+    <%= f.password_field :password,class:'form-control'%>
+    <%= f.label :confirmation%>
+    <%= f.password_field :password_confirmation,class:'form-control'%>
+    <br>
+    <div class="form-group ">
+      <%= rucaptcha_input_tag( class:'captcha-text',placeholder: '输入验证码') %>
+      <%= rucaptcha_image_tag(class:'image-box', alt: 'Captcha') %>
+      <span class="wrong-captcha">验证码错误</span>
+    </div>
+    <br>
+    <%=f.submit "Creat my account",class:"btn btn-primary form-control"%>
+    <% end %>
+  </div>
+</div>
+<style type="text/css">
+  .wrong-captcha{
+   color: red;
+   display: none;
+ }
+ .alert{
+  display: none
+ }
+ .wrong{
+   color: red;
+ }
+}
+</style>
+
+<script type="text/javascript">
+  function change_captcha(){
+    var src=$(".image-box").attr("src");
+    $(".image-box").attr("src",src.split("?")[0]+"?"+(new Date().getTime()))
+  }
+  $(".image-box").click(function(){
+    change_captcha();
+    // $(".wrong").hide();
+    $(".captcha-text").val("");
+  })
+  function captcha_is_true()
+  {
+    var content=$(".captcha-text").val();
+    $.ajax({
+      type:"GET",
+      url:"/users/verify_rucaptcha",
+      data: {_rucaptcha: content},
+      success:function(result){
+        alert(result + "result")
+        if(result=="false")
+        {
+          // change_captcha();
+          return false;
+        }
+        else
+         return true; 
+     }
+   })
+  }
+  $(".alert .close").click(function(){
+    $(".alert").css("display","none");
+  });
+ function insert(info)
+ {
+  $(".alert .info").text(info);
+  $(".alert ").show();
+ }
+ $(".btn").click(function(){
+   /* user_name=$("#user_name").val();
+    if (user_name.length==0 ){
+       insert("昵称不能为空!");
+       return false;
+    }
+    if(user_name.length>10)
+    {
+      insert("昵称长度不能超过10");
+      return false;
+    }*/
+    //*var reg= "/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/"
+    /*var user_email=$("#user_email").val();
+    if (reg.test(user_email))
+    {
+      insert("邮箱格式不合法");
+      return false;
+    }*/
+
+    /*var user_password=$("#user_password").val();
+    if (user_password.length<6)
+    {
+      insert("密码过短")
+      return false;
+    }
+
+    if(user_password.length>=16)
+    {
+      insert("密码长度超出限制");
+      return false;
+    }
+
+    if($("#user_password_confirmation").val()!=user_password)
+    {
+      insert("密码不匹配");
+      return false;
+    }
+    if (captcha_is_true()==false)
+    {
+      insert("验证码错误");
+      return false;
+    }
+
+    return true;/**/
+     });
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

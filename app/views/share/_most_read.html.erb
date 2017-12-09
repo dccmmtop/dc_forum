@@ -1,0 +1,8 @@
+<div class="widget tag-widget">
+  <h4 class="title">阅读排行</h4>
+  <div class="content read-count">
+    <% @topics.each do |topic|%>
+      <%= link_to topic.title << "(#{topic.read_count})",topic%><br>
+    <% end %>
+ </div>
+</div>

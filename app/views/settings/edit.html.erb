@@ -1,0 +1,82 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= simple_form_for @setting  do |f|%>
+      <div class="row">
+        <div class="col-md-6 one">
+          <%= f.input :manages_per_page_count,label:"后台管理分页列表数"%>
+          <%= f.input :category_list_count,label:'显示标签的个数'%>
+          <%= f.input :comment_list_count,label:'评论中的列表数'%>
+        </div>
+        <div class="col-md-6 two">
+          <%= f.input :read_rank_list_count,label:'阅读排行列表数'%>
+          <%= f.input :comment,label:'是否允许评论'%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    我的友情链接 
+  </div>
+  <div class="panel-body">
+    <div class = "friend">
+      <% current_user.friend_links.each do |friend| %>
+        <div class="show">
+          <label class="label-name">名称 </label><input type="text" value= "<%= friend.name %>" class="name">
+          <label class="label-link">链接 </label><input type="text" value= "<%= friend.link %>"class="link">
+          <a class="btn btn-danger" name="<%= friend.id %>" >删除</a>
+        </div> 
+      <% end %>
+      <div class="add">
+        <label class="label-name">名称 </label><input type="text" class="name name-add">
+        <label class="label-link">链接 </label><input type="text" class="link link-add">
+        <a class="btn btn-info btn-add" >添加</a>
+      </div> 
+    </div>
+  </div>
+</div>
+<style type="text/css">
+
+
+</style>
+<script type="text/javascript">
+$(".btn-add").click(function(){
+  var add_name = $(".name-add").val();
+  var add_link = $(".link-add").val();
+    if (add_name.length == 0)
+      alert("名称不能为空")
+    else if(add_link.length == 0)
+      alert("链接不能为空")
+    else{
+      $.ajax({
+        type:"POST",
+        url:"/friend_links",
+        data: {name: add_name,
+          link: add_link
+        },
+        success:function(result){
+          if(result=="false")
+          {
+            return false;
+          }
+          else
+          {
+            location.reload();
+          }
+        }
+      })
+    }
+});
+$(".btn-danger").click(function(){
+  var id = $(this).attr("name");
+  var object = $(this).parent();
+  $.ajax({
+    type:"DELETE",
+    url:"/friend_links/" + id,
+    success:function(result){
+      object.remove();
+    }
+  })
+});
+</script>

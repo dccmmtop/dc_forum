@@ -1,0 +1,24 @@
+<header class="main-header"  style='background-image: url(https://d3cbihxaqsuq0s.cloudfront.net/images/48545960_xl.jpg)'>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <% if user%>
+          <div class="img"><%= user_avatar_tag user,:md2%></div>
+          <h2 class="blog-title"><%= user.nickname %></h2>
+          <em class="summary"><%= user.summary%> </em>
+        <% else%>
+          <div class="img"></div>
+          <h2 class="blog-title"><br><br></h2>
+          <em class="summary"></em>
+        <% end %>
+
+        <img src="https://d3cbihxaqsuq0s.cloudfront.net/images/35514164_xl.jpg" alt="博客" class="hide">
+      </div>
+    </div>
+  </div>
+</header>
+<style>
+.summary{
+  color: #0a0202
+}
+</style>

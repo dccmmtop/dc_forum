@@ -1,0 +1,20 @@
+<section class="content-wrap">
+  <div class="row">
+    <main class="col-md-12 main-content">
+      <div class="panel panel-default">
+        <div class="panel-body text-center">
+          <h3 ><%=@category.name%></h3>
+          <h5>共有<%=@category.topics.count%>篇文章</h5>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div class="row">
+    <%= render "share/topics"%>
+    <aside class="col-md-4 sidebar">
+      <%= render "share/categories",categories: all_categories %>
+      <%= render "share/tags",tags: all_tags%>
+    </aside>
+  </div>
+  
+</section>

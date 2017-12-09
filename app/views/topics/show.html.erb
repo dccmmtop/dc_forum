@@ -1,0 +1,59 @@
+
+<section class="content-wrap">
+
+
+  <div class="row">
+
+    <main class="col-md-9 main-content">
+
+    <article id="108" class="post">
+
+      <div class="post-head">
+        <h1 class="post-title"><%=link_to @topic.title, @topic %></h1>
+        <div class="post-meta">
+          <span class="author">作者：<%= link_to @topic.user.name,'#'%></span> •
+          <time class="post-date" datetime="<%= @topic.created_at.strftime('%Y年%m月%d日')%>" title="<%= @topic.created_at.strftime('%Y年%m月%d日')%>"><%= @topic.created_at.strftime('%Y年%m月%d日')%></time>
+          <span class="read-count"> • 阅读次数：<%=@topic.read_count%></span>
+          <%=link_to " 编辑",edit_topic_path if current_user && @topic.user_id == current_user.id %>
+        </div>
+      </div>
+      <div class="post-content">
+        <p><%= markdown(@topic.body)%></p>
+      </div>
+      <footer class="post-footer clearfix">
+        <div class="pull-left tag-list">
+          <i class="fa fa-folder-open-o"">标签:
+            <%= @topic.tag&&@topic.tag.size>0 ? @topic.tag: '无'%>
+          </i>
+          &nbsp&nbsp&nbsp
+          <i class="fa fa-folder-open-o"">分类:
+            <%= @topic.category.name%>
+          </i>
+        </div>
+      </footer>
+    </article>
+    </main>
+    <aside class="col-md-3 sidebar">
+      <%= render "share/categories",categories: all_categories%>
+      <%= render "share/tags",tags: all_tags%>
+      <%= render "share/most_read",topics: sort_by_read_count(current_user)%>
+      <%= render "share/latest_comments"%>
+      <%= render 'share/friend_links' ,user: @topic.user%>
+    </aside>
+  </div>
+</section>
+<style>
+.container {
+  width: 70%;
+}
+</style>
+<script>
+// 无论有没有当前用户,都应该显示当前博文作者的头像和昵称
+// 所以首先清空原来的元素
+$(".img").empty();
+$(".blog-title").empty();
+$(".summary").empty();
+$(".img").append('<%= user_avatar_tag @topic.user,:md2%>');
+$(".blog-title").append("<%= @topic.user.nickname%>");
+$(".summary").append("<%= @topic.user.summary%>");
+</script>

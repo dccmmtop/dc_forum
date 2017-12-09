@@ -1,0 +1,27 @@
+ 
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <%= simple_form_for @topic do |f|%>
+      <%= f.input :title ,label: '标题'%>
+      <%= f.label "正文"%>
+      <%= f.text_area :body,rows:30,class:'form-control'%>
+      <span class="hint">支持markdown语法</span>
+      <%
+         category={}
+         Category.all.order(:id).each do |cate|
+          category[cate.name]=cate.id
+         end
+      %>
+      <%= f.input :category_id,label: "分类",collection: category,as: :radio_buttons,class:'form-control'%>
+      <%= f.input :tag,placeholder: '多个标签用逗号隔开',label:'标签'%>
+       
+      <%= f.submit "保存",class:' btn btn-primary col-md-2'%>
+      <% end%>
+    </div>
+  </div>
+ <style type="text/css">
+   .radio{
+    display: inline;
+    margin-left: 10px;
+   }
+ </style>

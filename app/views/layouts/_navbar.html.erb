@@ -1,0 +1,45 @@
+<nav class="main-navigation">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="navbar-header">
+          <span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu">
+            <span class="sr-only">Toggle navigation</span>
+            <i class="fa fa-bars"></i>
+          </span>
+        </div>
+        <div class="collapse navbar-collapse" id="main-menu">
+          <ul class="menu">
+            <li class='nav-topics-index ' role="presentation"><%= link_to '首页',root_path %></li>
+            <li  role="presentation" class='nav-'><a href="#">论坛</a></li>
+            
+            <% if !current_user%>
+            <li  role="presentation" class='nav nav-sessions-new'><%= link_to '登录',login_path%></a></li>
+            <li  role="presentation" class='nav nav-users-new'><%= link_to "注册",new_user_path%></li>
+            <% else %>
+            <li  role="presentation" class='nav nav-topics-new'><%= link_to "新文章",new_topic_path%></li>
+            <li  role="presentation" class='nav nav-manages-index'><%= link_to "管理",manages_path%></a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              我的 
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "账户信息", edit_user_path(current_user) %></li>
+                <li><%= link_to "博客设置", edit_setting_path(current_user.setting.id) %></li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to "退出", logout_path ,method: :delete%>
+                </li>
+              </ul>
+            </li>
+            <% end %>
+          </ul>   
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<script type="text/javascript">
+    $('.nav-<%= controller_name %>-<%=action_name %>').addClass("nav-current");
+</script>

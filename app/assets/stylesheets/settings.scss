@@ -1,0 +1,30 @@
+// Place all the styles related to the settings controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.one,.two{
+  .form-control{
+    display: inline;
+    width: 100px;
+    margin-left: 10px;
+  }
+}
+.friend{
+  input[type='text'],input[type='number']{
+    border-radius: 8px;
+  }
+  .btn{
+    margin-left: 5%;
+  }
+  .name,.link{
+    margin-left:1%;
+  }
+  .link{
+    width: 50%;
+  }
+  .label-link{
+    margin-left: 10%;
+  }
+  .show{
+    margin-bottom: 10px;
+  }
+}

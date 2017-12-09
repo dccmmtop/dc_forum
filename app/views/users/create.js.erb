@@ -1,0 +1,12 @@
+// $("ul.errors").html("");
+     $(".wrong").hide()
+<% if @user.errors.any? %>
+     <% @user.errors.full_messages.each do |m| %>
+      insert("<%= m.html_safe%>")
+
+       <% if m.html_safe.include?("Code")%>
+         change_captcha()
+         <% end %> 
+      <% break %>
+     <%end%>
+  <% end %>
