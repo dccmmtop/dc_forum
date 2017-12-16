@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
-  belongs_to :user,:topic
+  belongs_to :user
+  belongs_to :topic
+
   has_many :replies
 end

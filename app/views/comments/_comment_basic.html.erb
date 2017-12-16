@@ -1,0 +1,19 @@
+<div class="comment clear">
+  <div class="avatar"><%= user_avatar_tag comment.user,:md %></div>
+  <div class="infos">
+    <div class="info">
+      <span class="name"><%= comment.user.name %></span>
+      &nbsp
+      <span class="floors">#<%= i+1 %></span>
+      &nbsp
+      <span class="time"><%= calcu_date comment.updated_at %></span>
+      <span class="opt pull-right">
+        <i class="fa fa-reply" aria-hidden="true"></i>
+        &nbsp
+        <i class="fa fa-heart"></i>
+      </span>
+    </div>
+    <div class="markdown"><%=  markdown(comment.content)%></div>
+  </div>
+</div>
+

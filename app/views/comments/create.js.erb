@@ -1,0 +1,6 @@
+var i = <%= count = Comment.count - 1 %>
+object = $(".reply").before('<%=  notice_message .gsub(/\n/,"").html_safe %>')
+<% flash.clear  %>
+$(".body").append('<%=render('/comments/comment_basic',comment:@comment,i:count).gsub(/\n/,"").html_safe %>');
+$("#comment_content").val("");
+$(":not(.reply) > .panel-heading").text("共收到"+(i+1)+"条评论")

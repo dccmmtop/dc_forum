@@ -1,0 +1,37 @@
+// Place all the styles related to the comments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.comment{
+  margin-top: 1%;
+  border-bottom: 1px solid #eee;
+  .avatar{
+    float:left;
+    margin-left: 1%;
+  }
+  .infos{
+      margin-left: 60px;
+      margin-right: 15px;
+      margin-bottom: 15px;
+    .info{
+      .floors{
+      color:#7AA87A
+    }
+    .time{
+    color: #999
+    }
+    
+    }
+    .markdown{
+      // position: relative;
+      letter-spacing: .03em;
+      font-size: 15px;
+      text-overflow: ellipsis;
+      word-wrap: break-word
+    }
+
+  }
+}
+.clear {
+  clear:both;/*主要使用这个属性来清除浮动*/
+}
