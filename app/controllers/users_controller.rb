@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       @user = User.new(user_params)
       # @user.save
       if @user.save
-        if verify_rucaptcha?(@user)
+        if verify_rucaptcha
           log_in(@user)
           #设置   默认的博客设置信息
           current_user.create_setting
@@ -73,9 +73,9 @@ class UsersController < ApplicationController
 
   def verify_rucaptcha
     if verify_rucaptcha?(params[:_rucaptcha])
-      render  plain: "true"
+      return true
     else 
-      render :plain=>"false"
+      return false
     end
   end
 
