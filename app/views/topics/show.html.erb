@@ -4,7 +4,7 @@
 
   <div class="row">
 
-    <main class="col-md-9 main-content">
+    <main class="col-md-8 main-content">
 
     <article id="108" class="post">
 
@@ -32,21 +32,24 @@
         </div>
       </footer>
     </article>
-    <%= render "/comments/show_comments",topic: @topic %>
-    <%= render "/comments/comment" , topic: @topic%>
+    <% if @topic.user.setting.comment %>
+      <%= render "/comments/show_comments",topic: @topic %>
+      <%= render "/comments/comment" , topic: @topic  if current_user%>
+    <% end %>
     </main>
-    <aside class="col-md-3 sidebar">
+    <aside class="col-md-4 sidebar">
+      <%= render "share/notice"%>
       <%= render "share/categories",categories: all_categories%>
       <%= render "share/tags",tags: all_tags%>
       <%= render "share/most_read",topics: sort_by_read_count(current_user)%>
-      <%= render "share/latest_comments"%>
+      <%= render "share/latest_comments" %>
       <%= render 'share/friend_links' ,user: @topic.user%>
     </aside>
   </div>
 </section>
 <style>
 .container {
-  width: 60%;
+  width: 70%;
 }
 </style>
 <script>

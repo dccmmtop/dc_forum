@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
- 
+
   mount RuCaptcha::Engine => "/rucaptcha"
   root 'topics#index'
   get '/login',to:'sessions#new'
@@ -18,5 +18,11 @@ Rails.application.routes.draw do
   resources :manages
   resources :friend_links
   resources :comments
-  
-end
+  resources :admins
+  resources :limits
+  resources :notices do
+    collection do
+      get :new_to
+    end
+  end
+  end

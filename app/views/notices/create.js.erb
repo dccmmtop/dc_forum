@@ -1,0 +1,3 @@
+$(".message").wrap('<%= raw (notice_message .gsub(/\n/,""))%>');
+<% flash.clear %>
+$("#notice_content").val("");

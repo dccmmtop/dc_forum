@@ -4,15 +4,18 @@
   </div>
   <div class="panel-body">
     <div class="panel-body">
-      <% @comment = Comment.new(user_id: current_user.id,topic_id:topic.id) %>
+      <% @comment = Comment.new(user_id: current_user.id,topic_id:topic.id,to_comment_id: 0 ) %>
+      <div class = "reply-er"></div>
       <%= simple_form_for @comment,:remote => true do |f|%>
-        <%= f.text_area :content,rows:5,class:'form-control'%>
+        <%= f.text_area :content,rows:5,class:'form-control comment-content'%>
         <%= f.input :user_id,value: current_user.id,as:'hidden'%>
         <%= f.input :topic_id,value: topic.id,as:'hidden'%>
+        <%= f.input :to_comment_id ,value:0,as:'hidden',class:'to_comment_id'%>
         <div class="hint">支持markdown语法</div>
         <br>
-        <%= f.submit "回复",class:' btn btn-primary col-md-1'%>
+        <%= f.submit "回复",class:' btn btn-primary col-md-1 btn-reply'%>
       <% end%>
     </div>
   </div>
 </div>
+

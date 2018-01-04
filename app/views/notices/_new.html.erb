@@ -1,0 +1,15 @@
+
+  <div class="message"></div>
+  <div class="panel panel-default ">
+
+    <div class="panel-body">
+      <% @notice = Notice.new(content:"",admin_id:Admin.find_by(user_id: current_user.id).id)%>
+      <%= simple_form_for @notice,:remote => true do |f|%>
+      <%= f.text_area :content,rows:5,class:'form-control comment-content'%>
+      <%= f.input :admin_id,value: current_user.id,as:'hidden'%>
+      <div class="hint">支持markdown语法</div>
+      <br>
+      <%= f.submit "发布",class:' btn btn-primary col-md-1 '%>
+      <% end%>
+    </div>
+  </div>

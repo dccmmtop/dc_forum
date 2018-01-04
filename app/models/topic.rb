@@ -13,7 +13,7 @@ class Topic < ApplicationRecord
     end
   end
   def self.add_topic
-    dir=Dir.open("tmp/topic/")
+    dir=Dir.open("public/topics/")
     dir.each do |name|
       next if name=="." || name==".."
       path= "./tmp/topic/" << name

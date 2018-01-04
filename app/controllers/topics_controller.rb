@@ -11,6 +11,9 @@ class TopicsController < ApplicationController
   end
 
   def new
+    if Limit.find_by("to_user = ? and (status = 0 or status = 2)",current_user.email)
+      redirect_to root_url,alert: "你被限制不能发表文章,请于管理员联系!"
+    end
     @topic=Topic.new
   end
 

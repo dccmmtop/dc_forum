@@ -1,0 +1,14 @@
+
+  <div class="message"></div>
+  <div class="panel panel-default ">
+    <div class="panel-body">
+      <% @limit = Limit.new(admin_id:Admin.find_by(user_id: current_user.id).id,to_user:"",status:0)%>
+      <%= simple_form_for @limit,:remote => true do |f|%>
+      <%= f.input :to_user,label:"限制对象"%>
+       <%= f.input :admin_id,value: Admin.find_by(user_id: current_user.id).id ,as:"hidden"%>
+      <%= f.input :status,label:'限制种类',collection:{'不能发表文章'=>0,"不能评论"=>1,"全部"=>2}%>
+      <br>
+      <%= f.submit "提交",class:' btn btn-primary col-md-1 '%>
+      <% end%>
+    </div>
+  </div>

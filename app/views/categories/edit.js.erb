@@ -1,0 +1,11 @@
+var category_name = $("#category_name");
+category_name.val("<%= @category.name%>");
+var old = category_name.val();
+$(".add").val("修改");
+var add = $(".add").val();
+if (add == "修改")
+{
+  $(".add").click(function(){
+     category_name.val(category_name.val() + "-<%= @category.id%>")
+  });
+}

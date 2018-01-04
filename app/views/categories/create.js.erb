@@ -1,0 +1,4 @@
+$(".message").wrap('<%= raw (notice_message .gsub(/\n/,""))%>');
+$("table").append('<tr><td><%= @category.name%></td> <td><%= @category.topics_count%></td> <td><%= @category.created_at.strftime("%y-%m-%d %H:%M:%S")%></td><td onclick="$(this).parent().hide()"><%= link_to "删除" ,{controller: "categories",action:"destroy",id:@category.id}, method: :delete,data: { confirm: "Are you sure?" }%></td></tr>');
+$("#category_name").val("");
+<% flash.clear %>

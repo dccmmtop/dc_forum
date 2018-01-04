@@ -3,4 +3,6 @@ class Comment < ApplicationRecord
   belongs_to :topic
 
   has_many :replies
+
+  validates :content,presence: true 
 end

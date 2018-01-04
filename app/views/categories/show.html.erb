@@ -12,9 +12,13 @@
   <div class="row">
     <%= render "share/topics"%>
     <aside class="col-md-4 sidebar">
-      <%= render "share/categories",categories: all_categories %>
-      <%= render "share/tags",tags: all_tags%>
-    </aside>
+        <%= render "share/notice"%>
+        <%= render "share/categories",categories: all_categories%>
+        <%= render "share/tags",tags: all_tags%>
+        <%= render "share/most_read",topics: sort_by_read_count(current_user)%>
+        <%= render "share/latest_comments"%>
+        <%= render 'share/friend_links',user: current_user if current_user%>
+      </aside>
   </div>
   
 </section>

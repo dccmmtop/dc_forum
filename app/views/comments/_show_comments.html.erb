@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">共收到<%=  topic.comments.count %>条评论</div>
   <div class="body">
-    <% topic.comments.each_with_index do |comment,i| %>
+    <% topic.comments.order(created_at: :asc).each_with_index do |comment,i| %>
       <%= render '/comments/comment_basic',comment:comment,i:i %>
     <% end %>
   </div>

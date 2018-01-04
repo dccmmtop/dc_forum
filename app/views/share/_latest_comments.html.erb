@@ -1,6 +1,11 @@
 <div class="widget tag-widget">
   <h4 class="title">最新评论</h4>
-  <div class="content tag-cloud">
-    
- </div>
+  <div class="content">
+    <% counts = 10
+    counts = current_user.setting.comment_list_count if current_user
+  %>
+  <% Comment.order(created_at: :desc).limit(counts).each do |com| %>
+      <%= link_to "#{com.user.name}评论: " + truncate(com.content,length:15),topic_url(com.topic) %> <br>
+  <% end %>
+  </div>
 </div>

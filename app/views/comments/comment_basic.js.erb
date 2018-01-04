@@ -1,0 +1,21 @@
+
+$(".clear").mouseover(function(){
+  $(this).find(".reply-ta").show();
+});
+$(".clear").mouseleave(function(){
+  $(this).find(".reply-ta").hide();
+});
+
+$(".reply-ta").click(function(){
+  $(".reply-er").empty();
+  $(".reply-er").append('<span class="to"></span>');
+  $(".reply-er .to").before( '<i class="fa fa-reply" aria-hidden="true" title="回复"></i>');
+  $(".reply-er .to").text(" "+$(this).parent().siblings('span.name').text() + " ");
+  $(".reply-er .to").after('<i class= "fa fa-close" style="color:#B0C4DE"></i>');
+  $(".fa-close").click(function(){
+    $(".reply-er").empty();
+  });
+  $("#comment_to_comment_id").val($(this).parent().siblings("i.comment_id").text());
+  $(".comment-content").focus();
+});
+ 

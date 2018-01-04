@@ -5,4 +5,6 @@ class ApplicationController < ActionController::Base
   include UsersHelper
   include CategoriesHelper
   include TopicsHelper
+  include NoticesHelper
+  include LimitsHelper
 end

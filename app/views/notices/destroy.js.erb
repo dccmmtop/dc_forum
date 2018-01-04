@@ -1,0 +1,6 @@
+ $(".fa-building-o").click(function(){
+    var content = $(".col-md-10");
+    content.empty();
+    content.append('<%=(render "/notices/index").gsub(/\n/,"").html_safe%>');
+    return false;
+  });

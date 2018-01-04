@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171209055810) do
+ActiveRecord::Schema.define(version: 20180103122123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admins", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
@@ -28,6 +34,8 @@ ActiveRecord::Schema.define(version: 20171209055810) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "to_comment_id"
+    t.integer "like_counts"
   end
 
   create_table "friend_links", force: :cascade do |t|
@@ -36,6 +44,22 @@ ActiveRecord::Schema.define(version: 20171209055810) do
     t.string "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "limits", force: :cascade do |t|
+    t.integer "admin_id"
+    t.string "to_user"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status"
+  end
+
+  create_table "notices", force: :cascade do |t|
+    t.text "content"
+    t.integer "admin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "to_user"
   end
 
   create_table "replies", force: :cascade do |t|

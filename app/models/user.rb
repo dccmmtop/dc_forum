@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :friend_links
   has_many :comments
   has_one :setting
+  has_one :admin
 
   def password_not_blank?
      !password.blank?
