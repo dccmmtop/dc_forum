@@ -16,6 +16,7 @@
             <%= f.input :email,label:'邮箱'%>
             <%= f.input :sex,collection:{'男'=>0,'女'=>1,'其他'=>2},as: :radio_buttons,label: '性别'%>
             <%= f.input :birthday, start_year: 1960, end_year: Date.today.year,label:'出生日期'%>
+            <%= f.input :avatar,as:'file',label:'上传头像' %>
           </div>
         </div>
       </div>

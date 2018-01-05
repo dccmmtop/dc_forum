@@ -26,6 +26,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
+    Comment.where("to_comment_id = ?", @comment.id).delete_all
     @comment.destroy
     redirect_to comments_url,notice:'评论删除成功!'
   end

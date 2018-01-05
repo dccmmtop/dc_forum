@@ -1,5 +1,7 @@
+require 'carrierwave/orm/activerecord'
 class User < ApplicationRecord
 
+  mount_uploader :avatar,AvatarUploader
   before_save {self.email=email.downcase}
   
   EMAIL_FORMAT= /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
