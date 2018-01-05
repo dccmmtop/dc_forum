@@ -6,7 +6,7 @@
     <div class="row">
       <%= render "share/topics"%>
       <aside class="col-md-4 sidebar">
-        <%= render "share/notice"%>
+        <%= render "share/notice" if notice_count > 0%>
         <%= render "share/search"%>
         <%= render "share/categories",categories: all_categories%>
         <%= render "share/tags",tags: all_tags%>
