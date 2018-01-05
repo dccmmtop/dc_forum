@@ -2,10 +2,10 @@
  
     <div class="panel-body">
       <% @category = Category.new(name: "",topics_count:0)%>
-      <%= simple_form_for @category,:remote => true do |f|%>
+      <%= simple_form_for @category do |f|%>
       <%= f.input :name,label:"名称"%>
        <%= f.input :topics_count,value: 0 ,as:"hidden"%>
-      <%= f.submit "添加",class:' btn btn-primary  add'%>
+      <%= f.submit "添加",class:' btn btn-primary col-md-2 add'%>
       <% end%>
     </div>
  <br>

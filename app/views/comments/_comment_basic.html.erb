@@ -4,6 +4,7 @@
   <div class="infos">
     <div class="info">
     <i class="comment_id hidden" ><%= comment.id %></i>
+    <i class="user_id hidden" ><%= current_user.id if current_user %></i>
       <span class="name"><%= comment.user.name %></span>
       &nbsp
       <span class="floors">#<%= i+1 %></span>
@@ -12,10 +13,14 @@
       <span class="opt pull-right">
         <a  class = "reply-ta"> <i class="fa fa-reply" aria-hidden="true" title= "回复此楼"></i> </a>
         &nbsp
-        <i class="fa fa-heart"><% if comment.like_counts.to_i !=0 %>
-         <%= comment.like_counts.to_s + " 个赞" %>
+        <i class="fa fa-heart" <% if current_user && is_like?(current_user,comment)%> 
+        style="color:red"
+        <% end %>
+
+        >
+        <% if like_count(comment) !=0 %>
+         <%= like_count(comment).to_s + " 个赞" %>
          <% end %>
-           
          </i>
       </span>
     </div>

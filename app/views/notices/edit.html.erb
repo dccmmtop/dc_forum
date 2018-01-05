@@ -1,0 +1,17 @@
+<div class="row">
+  <%= render "/admins/left"%>
+  <div class="col-md-10">
+    <div class="message"></div>
+    <div class="panel panel-default ">
+      <div class="panel-body">
+        <%= simple_form_for @notice do |f|%>
+        <%= f.text_area :content,rows:5,class:'form-control comment-content'%>
+        <%= f.input :admin_id,value: current_user.id,as:'hidden'%>
+        <div class="hint">支持markdown语法</div>
+        <br>
+        <%= f.submit "修改",class:' btn btn-primary col-md-1 '%>
+        <% end%>
+      </div>
+    </div>
+  </div>
+</div>

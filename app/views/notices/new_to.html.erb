@@ -1,0 +1,21 @@
+<div class="row">
+  <%= render "/admins/left"%>
+  <div class="col-md-10">
+  <div class="panel panel-default ">
+
+  <div class="message"></div>
+    <div class="panel-body">
+      <% @notice = Notice.new(content:"",admin_id:Admin.find_by(user_id: current_user.id).id,to_user:"")%>
+      <%= simple_form_for @notice,:remote => true do |f|%>
+      <%= f.input :to_user,label: "通知对象",placeholder:"邮箱"%>
+      <%= f.text_area :content,rows:5,placeholder:"通知内容",class:'form-control comment-content'%>
+      <%= f.input :admin_id,value: current_user.id,as:'hidden'%>
+      <div class="hint">支持markdown语法</div>
+      <br>
+      <%= f.submit "发送",class:' btn btn-primary col-md-1 '%>
+      <% end%>
+    </div>
+  </div>
+  </div>
+  </div>
+  

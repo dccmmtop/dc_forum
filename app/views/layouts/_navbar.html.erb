@@ -31,16 +31,32 @@
                 </li>
               </ul>
               <% if Admin.find_by(user_id: current_user)%>
-              <li  role="presentation" class='nav nav-admin-index'><%= link_to "管理员",admins_path%></li>
+              <li  role="presentation" class='nav nav-admin-index'><%= link_to "管理员",new_notice_path%></li>
               <% end %>
             </li>
             <% end %>
+            <li>  
+            </li>
           </ul>   
         </div>
       </div>
     </div>
   </div>
 </nav>
+<style type="text/css">
+.search{
+  margin-right: -100px; 
+}
+  .search_content_nav_btn{
+    /*display: inline;*/
+    margin-left:  0px;
+  }
+  .search #search_content{
+    width: 200px;
+    height: 40px;
+    /*margin-left: 100px;*/
+  }
+</style>
 <script type="text/javascript">
   $('.nav-<%= controller_name %>-<%=action_name %>').addClass("nav-current");
 </script>

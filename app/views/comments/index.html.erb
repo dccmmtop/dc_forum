@@ -1,0 +1,33 @@
+<div class="row">
+  <%= render "/admins/left"%>
+  <div class="col-md-10">
+<div class="panel panel-default ">
+<table class="table table-hover">
+    <thead>
+      <tr class="th-color">
+        <th>评论者</th>
+        <th>评论对象</th>
+        <th>文章</th>
+        <th>评论内容</th>
+        <th>评论时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <% @comments.each do |comment| %>
+    <tr class="item" >
+      <td><%= comment.user.name%></td>
+      <td><%= comment.topic.user.name%></td>
+      <td><%= link_to truncate( comment.topic.title,length: 50),topic_path(comment.topic.id)%></td>
+      <td><%= link_to truncate( comment.content,length: 50),topic_path(comment.topic.id)%></td>
+      <td><%= comment.created_at.strftime('%y-%m-%d %H:%M:%S')%></td>
+      <td ><%= link_to "删除" ,{controller: 'comments',action:'destroy',id:comment.id}, method: :delete,data: { confirm: '确定删除吗?' }%>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+</div>
+</div>
+<nav class="pagination" role="navigation">
+  <span class="page-number"> <%= paginate @comments%></span>
+</nav> 

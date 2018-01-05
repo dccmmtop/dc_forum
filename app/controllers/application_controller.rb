@@ -7,4 +7,5 @@ class ApplicationController < ActionController::Base
   include TopicsHelper
   include NoticesHelper
   include LimitsHelper
+  include LikesHelper
 end
