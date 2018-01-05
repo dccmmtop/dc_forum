@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :topics, dependent: :destroy
   has_many :friend_links
   has_many :comments
+  has_many :limits
   has_one :setting
   has_one :admin
 

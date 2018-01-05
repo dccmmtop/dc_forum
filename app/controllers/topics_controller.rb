@@ -4,6 +4,10 @@ class TopicsController < ApplicationController
     @topics=all_topics_by_time.page(params[:page]).per(10)
   end
 
+  def all_index 
+    @all_topics = Topic.order(user_id: :desc).order(created_at: :desc).page(params[:page]).per(10)
+  end
+
   def show
     @topic=Topic.find(params[:id])
     @topic.update(read_count: @topic.read_count+1)
@@ -24,7 +28,7 @@ class TopicsController < ApplicationController
       @topic.save_tags
       redirect_to topic_url(@topic),notice: "发表成功!"
     else
-    redirect_to new_topic_url,alert: "发表失败!" << @topic.errors.full_messages.to_s
+      redirect_to new_topic_url,alert: "发表失败!" << @topic.errors.full_messages.to_s
     end
   end
 
@@ -42,6 +46,21 @@ class TopicsController < ApplicationController
     end
   end
 
+  def search_topics
+    @all_topics = Topic.joins(:user).where("title like '%#{params[:search_content]}%' or body like '%#{params[:search_content]}%' or name like '%#{params[:search_content]}%'").order(created_at: :desc)
+    @topics = @all_topics.page(params[:page]).per(10)
+  end
+
+
+  def search
+    if !params[:search_content] || params[:search_content].strip.size ==0
+      @all_topics = Topic.where("title = ?",'')
+    else
+      @all_topics = Topic.joins(:user).where("title like '%#{params[:search_content]}%' or body like '%#{params[:search_content]}%' or name like '%#{params[:search_content]}%'")
+    end
+     @all_topics = @all_topics.page(params[:page]).per(10)
+  end
+
   def destroy
     Topic.find(params[:id]).destroy
     Tag.where("topic_id=?",params[:id]).each do |tag|
@@ -51,7 +70,7 @@ class TopicsController < ApplicationController
   end
 
   def topics_params
-    params.require(:topic).permit(:title,:body,:tag,:category_id)
+    params.require(:topic).permit(:title,:body,:tag,:category_id,:search_content)
   end
 
 end

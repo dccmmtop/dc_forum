@@ -1,43 +1,43 @@
 class NoticesController < ApplicationController
 
   def index
-    respond_to do |format|
-      @notices = Notice.order(created_at: :desc)
-      format.js{}
-    end
+    @notices = Notice.order(created_at: :desc).page(params[:page]).per(15)
   end
 
   def new
     @notice = Notice.new
   end
 
+  def new_to
+    @notice = Notice.new
+  end
+
   def create
     @notice = Notice.new(noctice_params)
-    respond_to do |format|
-      if @notice.save
-        flash[:notice] = '发布成功!'
-      else
-       flash[:alert] = '发布失败!'
-     end
-     format.js{}
-   end
- end
+    if @notice.save
+      redirect_to notices_url,notice: '发布成功!'
 
- def edit
-  @notice =  Notice.find(params[:id])
-  respond_to do |format|
-    format.js{}
+    else
+      redirect_to notices_url,alert: '发布发布失败!'
+    end
   end
- end
 
- def destroy
-  Notice.find(params[:id]).destroy
-  respond_to do |format|
-    format.html { head :no_content }
+  def edit
+    @notice =  Notice.find(params[:id])
   end
-end
 
-def noctice_params
-  params.require(:notice).permit(:content,:admin_id,:to_user)
-end
+  def update
+    @notice =  Notice.find(params[:id])
+    @notice.update(noctice_params)
+    redirect_to notices_url,notice: '修改成功!'
+  end
+
+  def destroy
+    Notice.find(params[:id]).destroy
+    redirect_to notices_url,notice: '删除成功!'
+  end
+
+  def noctice_params
+    params.require(:notice).permit(:content,:admin_id,:to_user)
+  end
 end

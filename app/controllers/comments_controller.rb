@@ -1,5 +1,9 @@
 class CommentsController < ApplicationController
 
+  def index
+    @comments = Comment.order(user_id: :asc).page(params[:page]).per(10)
+  end
+
   def create
     if Limit.find_by("to_user =?  and (status = 1 or status =2)",current_user.email)
       redirect_to topic_url(params[:comment][:topic_id]),alert:"你被限制不能评论,请与管理员联系!"
@@ -18,6 +22,12 @@ class CommentsController < ApplicationController
       format.js{} 
     end
   end
+  end
+
+  def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to comments_url,notice:'评论删除成功!'
   end
 
   def edit

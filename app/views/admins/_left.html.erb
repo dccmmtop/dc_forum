@@ -1,0 +1,20 @@
+  <div class="col-md-2"> 
+   <div class="panel panel-default"> 
+    <ul class="nav nav-pills nav-stacked"> 
+
+    <li class="nav-notices-new"><%= link_to " 发布公告",new_notice_path,class:"fa fa-bullhorn" %></li>
+     <li class= "nav-notices-index nav-notices-edit" ><%= link_to " 历史公告", notices_path,class:"fa fa-building-o" %></li>
+     <li class="nav-notices-new_to">  <%= link_to " 通知",new_to_notices_path,class:"fa fa-address-card"%></li> 
+     <li class="nav-limits-new"> <%= link_to " 添加限制",new_limit_path,class:"fa fa-qrcode"%></li>
+     <li class="nav-limits-index"> <%= link_to " 解除限制",limits_path,class:"fa fa-ravelry"%></li>
+     <li class="nav-categories-index nav-categories-edit"><%= link_to " 分类管理",categories_path,class:"fa fa-cube"%></li>
+     <li class="nav-users-index"><%= link_to " 用户管理",users_path,class:"fa fa-address-book-o"%></li>
+      <li class="nav-topics-all_index "><%= link_to " 文章管理",all_index_topics_path,class:"fa fa-tasks"%></li>
+      <li class="nav-comments-index "><%= link_to " 评论管理",comments_path,class:"fa fa-tasks"%></li>
+   </ul> 
+ </div> 
+</div>
+
+<script type="text/javascript">
+  $('.nav-<%= controller_name %>-<%=action_name %>').addClass("active");
+</script>

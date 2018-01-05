@@ -15,8 +15,7 @@
       <td><%= category.name%></td>
       <td><%=category.topics_count%></td>
       <td><%= category.created_at.strftime('%y-%m-%d %H:%M:%S')%></td>
-      <td onclick="var re= confirm('是否删除！');$(this).parent().hide()
-      <re></re>"><%= link_to "删除" ,{controller: 'categories',action:'destroy',id:category.id}, method: :delete%> 
+      <td onclick="var re= confirm('是否删除！'); if(re){$(this).parent().hide()}"><%= link_to "删除" ,{controller: 'categories',action:'destroy',id:category.id}, method: :delete%> 
       </td>
     </tr>
     <% end %>

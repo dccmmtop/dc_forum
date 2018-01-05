@@ -5,51 +5,35 @@ class CategoriesController < ApplicationController
     @category
   end
 
-    def create
-    if params[:commit] == ("修改")
-       update
-    else
+  def create
     @category = Category.new(category_params)
-    respond_to do |format|
-      if @category.save
-        flash[:notice] = '添加成功!'
-      else
-       flash[:alert] = '添加失败!'
-     end
-     format.js{}
-   end
-   end
- end
+    if @category.save
+      redirect_to categories_url,notice: "添加成功!"
+    else
+      redirect_to categories_url,notice: "添加失败!"
+    end
+  end
 
- def update
-  
-   @category = Category.find(params[:category][:name].split("-")[1].to_i)
-   params[:category][:name] = params[:category][:name].split("-")[0]
+  def update
+   @category = Category.find(params[:id])
    @category.update(category_params)
-   respond_to do |format|
-     format.js {}
-   end
+    redirect_to categories_url,notice: "修改成功!"
  end
 
  def edit
-    @category = Category.find(params[:id])
-    respond_to do |format|
-     format.js{}
-   end
- end
-
-  def index
-    @categories = Category.order(topics_count: :desc)
-  end
-
- def destroy
-  Category.find(params[:id]).destroy
-  respond_to do |format|
-    format.html { head :no_content }
-  end
+  @category = Category.find(params[:id])
 end
 
-  def category_params
-    params.require(:category).permit(:name,:topics_count)
-  end
+def index
+  @categories = Category.order(topics_count: :desc).page(params[:page]).per(15)
+end
+
+def destroy
+  Category.find(params[:id]).destroy
+  redirect_to categories_url,notice: "删除成功!"
+end
+
+def category_params
+  params.require(:category).permit(:name,:topics_count)
+end
 end

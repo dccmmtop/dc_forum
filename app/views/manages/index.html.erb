@@ -20,7 +20,7 @@
         <tr>
           <td><%= link_to truncate(topic.title,length: 20),topic %></td>
           <td><%=topic.created_at.strftime('%Y-%m-%d %H:%M')%></td>
-          <td > 0</td>
+          <td ><%= Comment.where("topic_id = ?",topic.id).count%></td>
           <td > <%=topic.read_count%></td>
           <td > <%=topic.category.name%></td>
           <td><%= link_to "编辑" ,edit_topic_path(topic)%></td>
