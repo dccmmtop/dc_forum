@@ -1,10 +1,9 @@
 <div class="widget notice-widget">
   <h4 class="title">搜一搜</h4>
-  <div class="notice">
-   <%= form_tag controller: "topics", action: "search_topics" do %>   
-    <%= text_field_tag :search_content, params[:search_content],placeholder:"标题/内容/用户名称",class:"form-control",style:'width: 250px;'%>
-    <%= submit_tag '搜索',class:"btn btn-info search_content_nav_btn" ,style:"margin-top:-60px;
-    margin-left:265px;"%> 
-    <% end %>
+  <div class="notice" >
+    <%= form_tag controller: "topics", action: "search_topics" do %>   
+      <%= text_field_tag :search_content, params[:search_content],placeholder:"标题/内容/用户名称",class: "form-control ",style:'width:70%'%>
+    <%= submit_tag '搜索',class: "btn btn-info",style:'margin-left:73%;margin-top:-17%'%> 
   </div>
+<% end %>
 </div>

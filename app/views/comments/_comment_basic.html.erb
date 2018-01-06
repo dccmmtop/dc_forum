@@ -1,10 +1,9 @@
 <div class="comment clear">
   <div class="avatar"><%= user_avatar_tag comment.user,:md %></div>
-  
   <div class="infos">
     <div class="info">
-    <i class="comment_id hidden" ><%= comment.id %></i>
-    <i class="user_id hidden" ><%= current_user.id if current_user %></i>
+      <i class="comment_id hidden" ><%= comment.id %></i>
+      <i class="user_id hidden" ><%= current_user.id if current_user %></i>
       <span class="name"><%= comment.user.name %></span>
       &nbsp
       <span class="floors">#<%= i+1 %></span>
@@ -14,24 +13,24 @@
         <a  class = "reply-ta"> <i class="fa fa-reply" aria-hidden="true" title= "回复此楼"></i> </a>
         &nbsp
         <i class="fa fa-heart" <% if current_user && is_like?(current_user,comment)%> 
-        style="color:red"
+          style="color:red"
         <% end %>
 
-        >
-        <% if like_count(comment) !=0 %>
-         <%= like_count(comment).to_s + " 个赞" %>
-         <% end %>
-         </i>
+          >
+          <% if like_count(comment) !=0 %>
+            <%= like_count(comment).to_s + " 个赞" %>
+        <% end %>
+        </i>
       </span>
     </div>
     <% if comment.to_comment_id !=0 %>
-    <%  reply = Comment.find(comment.to_comment_id) %>
-      <div class="info-reply">
+      <%  reply = Comment.find(comment.to_comment_id) %>
+    <div class="info-reply">
       对
-          <%= user_avatar_tag reply.user,:xs %><span class="user-name"><%= " "+reply.user.name+ " ##{i}" %></span>
-    回复
+      <%= user_avatar_tag reply.user,:xs %><span class="user-name"><%= " "+reply.user.name+ " ##{i}" %></span>
+      回复
     </div>
-    <% end %>
+  <% end %>
     <div class="markdown"><%=  markdown(comment.content)%></div>
   </div>
 </div>
