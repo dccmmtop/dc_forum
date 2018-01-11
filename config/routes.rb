@@ -5,10 +5,15 @@ Rails.application.routes.draw do
   get '/login',to:'sessions#new'
   post '/login',to:'sessions#create'
   delete '/logout',to:'sessions#destroy'
+  get '/forget_password',to:'sessions#forget_password'
+  post '/send_email',to: 'sessions#send_email'
+  get "not_found",to: 'home#not_found'
+  get "update_password",to:'sessions#update_password'
 
   resources :users do
     collection do 
       get :verify_rucaptcha
+      post :update_password_from_forget
     end
   end
   resources :settings

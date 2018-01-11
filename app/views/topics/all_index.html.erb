@@ -1,6 +1,6 @@
 <div class="row">
   <%= render "/admins/left"%>
-  <div class="col-md-9">
+  <div class="col-md-8">
     <div class="panel panel-default ">
       <table class="table table-hover">
         <thead>
@@ -26,17 +26,19 @@
       </table>
     </div>
   </div>
-  <div class="col-md-1">
     
-<%= form_tag controller: "topics", action: "search" do %>   
-    <%= text_field_tag :search_content, params[:search_content],placeholder:"标题/内容/用户名称"%>
-    <%= submit_tag '搜索',class:"btn btn-info search_content" %> 
-<% end %>  
+  <%= form_tag controller: "topics", :action => "search" do %>   
+  <div class='input-group col-md-2'>
+    <%= text_field_tag :search_content, params[:search_content],placeholder:"标题/内容/用户名称", class: 'form-control'%>
+  <span class="input-group-btn">
+    <%= submit_tag '搜索',class: "btn btn-info search_content ",style: "margin-left: 10%" %> 
+  </span>
   </div>
+<% end %>  
 </div>
 <nav class="pagination" role="navigation">
   <span class="page-number"> <%= paginate @all_topics%></span>
 </nav> 
 <style type="text/css">
-  
+
 </style>

@@ -18,7 +18,7 @@ class TopicsController < ApplicationController
     if Limit.find_by("to_user = ? and (status = 0 or status = 2)",current_user.email)
       redirect_to root_url,alert: "你被限制不能发表文章,请于管理员联系!"
     end
-    @topic=Topic.new
+    @topic=Topic.new(category_id: 33)
   end
 
   def create
@@ -49,6 +49,7 @@ class TopicsController < ApplicationController
   def search_topics
     @all_topics = Topic.joins(:user).where("title like '%#{params[:search_content]}%' or body like '%#{params[:search_content]}%' or name like '%#{params[:search_content]}%'").order(created_at: :desc)
     @topics = @all_topics.page(params[:page]).per(10)
+    render "index"
   end
 
 

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_login,:set_user, only: [:show, :edit,:update, :destroy]
+  before_action :require_admin ,only:[:destroy]
 
   # GET /users
   # GET /users.json
@@ -62,6 +63,15 @@ class UsersController < ApplicationController
    end
  end
 
+  def update_password_from_forget
+    @user = User.find(params[:user][:id])
+    if @user.update(user_params)
+      redirect_to login_url,notice:'密码修改成功，请重新登录'
+    else
+      redirect_to params[:up_url],alert:'密码修改失败' << @user.errors.full_messages.to_s
+    end
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
@@ -88,7 +98,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email,:old_password,:password,:password_confirmation,:qq,:sex,:summary,:birthday,:address,:marital_status,:degree,:position,:tel,:nickname ,:avatar)
+      params.require(:user).permit(:id,:name, :email,:old_password,:password,:password_confirmation,:qq,:sex,:summary,:birthday,:address,:marital_status,:degree,:position,:tel,:nickname ,:avatar,:up_url)
     end
 
   end

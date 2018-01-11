@@ -1,4 +1,5 @@
 class LimitsController < ApplicationController
+  before_action :require_login,:require_admin
 
 
   def new

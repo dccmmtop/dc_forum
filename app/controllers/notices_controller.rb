@@ -1,4 +1,5 @@
 class NoticesController < ApplicationController
+  before_action :require_login,:require_admin
 
   def index
     @notices = Notice.order(created_at: :desc).page(params[:page]).per(15)

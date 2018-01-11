@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :require_login,:require_admin,only:[:create,:update,:edit,:destroy]
   def show
     @category=Category.find(params[:id])
     @topics=@category.topics.order(read_count: :desc).page(params[:page]).per(10)
